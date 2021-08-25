@@ -5,7 +5,7 @@ import app from '../lib/app.js';
 
 describe('auth routes', () => {
   const user = {
-    username: 'peaches',
+    email: 'peachy@peachy.com',
     password: 'peachesthedog'
   };
 
@@ -17,10 +17,11 @@ describe('auth routes', () => {
     const res = await request(app)
       .post('/api/v1/auth/signup')
       .send(user);
+    console.log('res.body', res.body);
+
     expect(res.body).toEqual({
       id: '1',
-      username: user.username,
-      passwordHash: expect.any(String)
+      email: user.email
     });
   });
 });

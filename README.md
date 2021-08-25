@@ -1,1 +1,2 @@
 # techwizquiz-be
+techquiz

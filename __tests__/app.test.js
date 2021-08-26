@@ -18,7 +18,6 @@ describe('auth routes', () => {
     const res = await request(app)
       .post('/api/v1/auth/signup')
       .send(user);
-    console.log('res.body', res.body);
 
     expect(res.body).toEqual({
       id: '1',

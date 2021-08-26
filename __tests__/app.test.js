@@ -38,15 +38,4 @@ describe('auth routes', () => {
     });
   });
 
-  test('GET user from /auth/logout', async () => {
-    await UserService.create(user);
-
-    const res = await request.agent(app)
-      .get('/api/v1/auth/logout')
-      .send(user);
-    expect(res.body).toEqual({
-      id: '1',
-      email: 'peachy@peachy.com'
-    });
-  });
 });

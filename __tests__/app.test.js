@@ -37,4 +37,5 @@ describe('auth routes', () => {
       email: 'peachy@peachy.com'
     });
   });
+
 });

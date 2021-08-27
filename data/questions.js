@@ -353,5 +353,145 @@ export default [
   `,
     language: 'JavaScript'
   },
+  {
+    level: 1,
+    questionTitle: 'What\'s the output?',
+    questionText: `
+    let number = 0;
+    console.log(number++);
+    console.log(++number);
+    console.log(number);
+    `,
+    answer: 'c',
+    a: '1 1 2',
+    b: '1 2 2',
+    c: '0 2 2',
+    d: '0 1 2',
+    explanation: `
+    The postfix unary operator ++:
+
+    Returns the value (this returns 0)
+    Increments the value (number is now 1)
+    The prefix unary operator ++:
+    
+    Increments the value (number is now 2)
+    Returns the value (this returns 2)
+    This returns 0 2 2.
+  `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What\'s the output?',
+    questionText: `
+    function getPersonInfo(one, two, three) {
+      console.log(one);
+      console.log(two);
+      console.log(three);
+    }
+    
+    const person = 'Lydia';
+    const age = 21;
+    
+    getPersonInfo\`\${person} is \${age} years old\`;
+    `,
+    answer: 'b',
+    a: '"Lydia" 21 ["", " is ", " years old"]',
+    b: '["", " is ", " years old"] "Lydia" 21',
+    c: '"Lydia" ["", " is ", " years old"] 21',
+    d: '["", " is ", " years old"] 21 "Lydia"',
+    explanation: `
+    If you use tagged template literals, the value of the first argument is always an array of the string values. The remaining arguments get the values of the passed expressions!
+  `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What\'s the output?',
+    questionText: `
+    function checkAge(data) {
+      if (data === { age: 18 }) {
+        console.log('You are an adult!');
+      } else if (data == { age: 18 }) {
+        console.log('You are still an adult.');
+      } else {
+        console.log(\`Hmm.. You don't have an age I guess\`);
+      }
+    }
+    
+    checkAge({ age: 18 });
+    `,
+    answer: 'c',
+    a: 'You are an adult!',
+    b: 'undefined',
+    c: 'Hmm.. You don\'t have an age I guess',
+    d: 'You are still an adult.',
+    explanation: `
+    When testing equality, primitives are compared by their value, while objects are compared by their reference. JavaScript checks if the objects have a reference to the same location in memory.
+
+    The two objects that we are comparing don't have that: the object we passed as a parameter refers to a different location in memory than the object we used in order to check equality.
+
+    This is why both { age: 18 } === { age: 18 } and { age: 18 } == { age: 18 } return false.
+  `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What\'s the output?',
+    questionText: `
+    function getAge(...args) {
+      console.log(typeof args);
+    }
+    
+    getAge(21);
+    `,
+    answer: 'c',
+    a: '"number"',
+    b: '"array"',
+    c: '"object"',
+    d: '"NaN"',
+    explanation: `
+    The rest parameter (...args) lets us "collect" all remaining arguments into an array. An array is an object, so typeof args returns "object"
+  `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What\'s the output?',
+    questionText: `
+    function getAge() {
+      'use strict';
+      age = 21;
+      console.log(age);
+    }
+    
+    getAge();
+    `,
+    answer: 'c',
+    a: '21',
+    b: 'undefined',
+    c: 'ReferenceError',
+    d: 'TypeError',
+    explanation: `
+    With "use strict", you can make sure that you don't accidentally declare global variables. We never declared the variable age, and since we use "use strict", it will throw a reference error. If we didn't use "use strict", it would have worked, since the property age would have gotten added to the global object.
+  `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What\'s the value of sum?',
+    questionText: `
+    const sum = eval('10*10+5');
+    `,
+    answer: 'a',
+    a: '105',
+    b: '"105',
+    c: 'TypeError',
+    d: '"10*10+5',
+    explanation: `
+    eval evaluates codes that's passed as a string. If it's an expression, like in this case, it evaluates the expression. The expression is 10 * 10 + 5. This returns the number 105.
+  `,
+    language: 'JavaScript'
+  },
 ];
 

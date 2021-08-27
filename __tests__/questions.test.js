@@ -63,9 +63,9 @@ describe('questions routes', () => {
 
   it('gets a question by id', async () => {
     const perl = await Question.insert(perlQ);
-
+    console.log(perl);
     const res = await request(app)
-      .get(`/api/v1/questions/${perl.id}`);
+      .get(`/api/v1/questions/${perl.questionId}`);
     expect(res.body).toEqual(perl);
   });
 });

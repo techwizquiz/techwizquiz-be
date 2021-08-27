@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 export const questions = [
   {
     level: 1,
@@ -1658,6 +1659,2259 @@ export const questions = [
     explanation: `
     With the + operator, you can concatenate strings. In this case, we are concatenating the string "🥑" with the string "💻", resulting in "🥑💻".
   `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'How can we log the values that are commented out after the console.log statement?',
+    questionText:  `
+    function* startGame() {
+      const answer = yield 'Do you love JavaScript?';
+      if (answer !== 'Yes') {
+        return "Oh wow... Guess we're gone here";
+      }
+      return 'JavaScript loves you back ❤️';
+    }
+    
+    const game = startGame();
+    console.log(/* 1 */); // Do you love JavaScript?
+    console.log(/* 2 */); // JavaScript loves you back ❤️
+    `,
+    answer: 'c',
+    a: 'game.next("Yes").value and game.next().value',
+    b: 'game.next.value("Yes") and game.next.value()',
+    c: 'game.next().value and game.next("Yes").value',
+    d: 'game.next.value() and game.next.value("Yes")',
+    explanation: `
+    A generator function "pauses" its execution when it sees the yield keyword. First, we have to let the function yield the string "Do you love JavaScript?", which can be done by calling game.next().value.
+
+    Every line is executed, until it finds the first yield keyword. There is a yield keyword on the first line within the function: the execution stops with the first yield! This means that the variable answer is not defined yet!
+    
+    When we call game.next("Yes").value, the previous yield is replaced with the value of the parameters passed to the next() function, "Yes" in this case. The value of the variable answer is now equal to "Yes". The condition of the if-statement returns false, and JavaScript loves you back ❤️ gets logged.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What\'s the output',
+    questionText: `
+    console.log(String.raw\`Hello\nworld\`);
+    `,
+    answer: 'c',
+    a: 'Hello world!',
+    b: 'Hello world',
+    c: 'Hello\nworld',
+    d: 'Hello\n world',
+    explanation: `
+    String.raw returns a string where the escapes (\n, \v, \t etc.) are ignored! Backslashes can be an issue since you could end up with something like:
+
+    const path = \`C:\Documents\Projects\table.html\`
+
+    Which would result in:
+
+    "C:DocumentsProjects able.html"
+
+    With String.raw, it would simply ignore the escape and print:
+
+    C:\Documents\Projects\table.html
+
+    In this case, the string is Hello\nworld, which gets logged.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What\'s the output?',
+    questionText: `
+    async function getData() {
+      return await Promise.resolve('I made it!');
+    }
+    
+    const data = getData();
+    console.log(data);
+    `,
+    answer: 'c',
+    a: '"I made it!"',
+    b: 'Promise {<resolved>: "I made it!"}',
+    c: 'Promise {<pending>}',
+    d: 'undefined',
+    explanation: `
+    An async function always returns a promise. The await still has to wait for the promise to resolve: a pending promise gets returned when we call getData() in order to set data equal to it.
+
+If we wanted to get access to the resolved value "I made it", we could have used the .then() method on data:
+
+data.then(res => console.log(res))
+
+This would've logged "I made it!"
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What\'s the output?',
+    questionText: `
+    function addToList(item, list) {
+      return list.push(item);
+    }
+    
+    const result = addToList('apple', ['banana']);
+    console.log(result);
+    `,
+    answer: 'b',
+    a: '[\'apple\', \'banana\']',
+    b: '2',
+    c: 'true',
+    d: 'undefined',
+    explanation: `
+    The .push() method returns the length of the new array! Previously, the array contained one element (the string "banana") and had a length of 1. After adding the string "apple" to the array, the array contains two elements, and has a length of 2. This gets returned from the addToList function.
+
+    The push method modifies the original array. If you wanted to return the array from the function rather than the length of the array, you should have returned list after pushing item to it.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What\'s the output?',
+    questionText: `
+    const box = { x: 10, y: 20 };
+
+    Object.freeze(box);
+
+    const shape = box;
+    shape.x = 100;
+
+    console.log(shape); 
+    `,
+    answer: 'b',
+    a: '{ x: 100, y: 20 }',
+    b: '{ x: 10, y: 20 }',
+    c: '{ x: 100 }',
+    d: 'ReferenceError',
+    explanation: `
+    Object.freeze makes it impossible to add, remove, or modify properties of an object (unless the property's value is another object).
+
+    When we create the variable shape and set it equal to the frozen object box, shape also refers to a frozen object. You can check whether an object is frozen by using Object.isFrozen. In this case, Object.isFrozen(shape) returns true, since the variable shape has a reference to a frozen object.
+
+    Since shape is frozen, and since the value of x is not an object, we cannot modify the property x. x is still equal to 10, and { x: 10, y: 20 } gets logged.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What\'s the output',
+    questionText: `
+    const { name: myName } = { name: 'Lydia' };
+
+    console.log(name);
+    `,
+    answer: 'd',
+    a: '"Lydia"',
+    b: '"myname"',
+    c: 'undefined',
+    d: 'ReferenceError',
+    explanation: `
+    When we unpack the property name from the object on the right-hand side, we assign its value "Lydia" to a variable with the name myName.
+
+    With { name: myName }, we tell JavaScript that we want to create a new variable called myName with the value of the name property on the right-hand side.
+
+    Since we try to log name, a variable that is not defined, a ReferenceError gets thrown.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'Is this a pure function?',
+    questionText: `
+    function sum(a, b) {
+      return a + b;
+    }
+    `,
+    answer: 'a',
+    a: 'Yes',
+    b: 'No',
+    c: 'It could be',
+    d: 'It might not be',
+    explanation: `
+    A pure function is a function that always returns the same result, if the same arguments are passed.
+
+    The sum function always returns the same result. If we pass 1 and 2, it will always return 3 without side effects. If we pass 5 and 10, it will always return 15, and so on. This is the definition of a pure function.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output',
+    questionText: `
+    const add = () => {
+      const cache = {};
+      return num => {
+        if (num in cache) {
+          return \`From cache! \${cache[num]}\`;
+        } else {
+          const result = num + 10;
+          cache[num] = result;
+          return \`Calculated! \${result}\`;
+        }
+      };
+    };
+    
+    const addFunction = add();
+    console.log(addFunction(10));
+    console.log(addFunction(10));
+    console.log(addFunction(5 * 2));
+    `,
+    answer: 'c',
+    a: 'Calculated! 20 Calculated! 20 Calculated! 20',
+    b: 'Calculated! 20 From cache! 20 Calculated! 20',
+    c: 'Calculated! 20 From cache! 20 From cache! 20',
+    d: 'Calculated! 20 From cache! 20 Error',
+    explanation: `
+    The add function is a memoized function. With memoization, we can cache the results of a function in order to speed up its execution. In this case, we create a cache object that stores the previously returned values.
+
+    If we call the addFunction function again with the same argument, it first checks whether it has already gotten that value in its cache. If that's the case, the caches value will be returned, which saves on execution time. Else, if it's not cached, it will calculate the value and store it afterwards.
+
+    We call the addFunction function three times with the same value: on the first invocation, the value of the function when num is equal to 10 isn't cached yet. The condition of the if-statement num in cache returns false, and the else block gets executed: Calculated! 20 gets logged, and the value of the result gets added to the cache object. cache now looks like { 10: 20 }.
+
+    The second time, the cache object contains the value that gets returned for 10. The condition of the if-statement num in cache returns true, and 'From cache! 20' gets logged.
+
+    The third time, we pass 5 * 2 to the function which gets evaluated to 10. The cache object contains the value that gets returned for 10. The condition of the if-statement num in cache returns true, and 'From cache! 20' gets logged.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output',
+    questionText: `
+    const myLifeSummedUp = ['☕', '💻', '🍷', '🍫'];
+
+    for (let item in myLifeSummedUp) {
+      console.log(item);
+    }
+
+    for (let item of myLifeSummedUp) {
+      console.log(item);
+    }
+    `,
+    answer: 'a',
+    a: '0 1 2 3 and "☕" "💻" "🍷" "🍫"',
+    b: '"☕" "💻" "🍷" "🍫" and "☕" "💻" "🍷" "🍫"',
+    c: '"☕" "💻" "🍷" "🍫" and 0 1 2 3',
+    d: '0 1 2 3 and {0: "☕", 1: "💻", 2: "🍷", 3: "🍫"}',
+    explanation: `
+    With a for-in loop, we can iterate over enumerable properties. In an array, the enumerable properties are the "keys" of array elements, which are actually their indexes. You could see an array as:
+
+    {0: "☕", 1: "💻", 2: "🍷", 3: "🍫"}
+
+    Where the keys are the enumerable properties. 0 1 2 3 get logged.
+
+    With a for-of loop, we can iterate over iterables. An array is an iterable. When we iterate over the array, the variable "item" is equal to the element it's currently iterating over, "☕" "💻" "🍷" "🍫" get logged.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output',
+    questionText: `
+    const list = [1 + 2, 1 * 2, 1 / 2];
+    console.log(list);
+    `,
+    answer: 'c',
+    a: '["1 + 2", "1 * 2", "1 / 2"]',
+    b: '["12", 2, 0.5]',
+    c: '[3, 2, 0.5]',
+    d: '[1, 1, 1]',
+    explanation: `
+    Array elements can hold any value. Numbers, strings, objects, other arrays, null, boolean values, undefined, and other expressions such as dates, functions, and calculations.
+
+    The element will be equal to the returned value. 1 + 2 returns 3, 1 * 2 returns 2, and 1 / 2 returns 0.5.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output',
+    questionText: `
+    function sayHi(name) {
+      return \`Hi there, \${name}\`;
+    }
+    
+    console.log(sayHi());
+    `,
+    answer: 'b',
+    a: 'Hi there,',
+    b: 'Hi there, undefined',
+    c: 'Hi there, null',
+    d: 'ReferenceError',
+    explanation: `
+    By default, arguments have the value of undefined, unless a value has been passed to the function. In this case, we didn't pass a value for the name argument. name is equal to undefined which gets logged.
+
+    In ES6, we can overwrite this default undefined value with default parameters. For example:
+
+    function sayHi(name = "Lydia") { ... }
+
+    In this case, if we didn't pass a value or if we passed undefined, name would always be equal to the string Lydia
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output',
+    questionText: `
+    var status = '😎';
+
+    setTimeout(() => {
+      const status = '😍';
+
+      const data = {
+        status: '🥑',
+        getStatus() {
+          return this.status;
+        },
+      };
+
+      console.log(data.getStatus());
+      console.log(data.getStatus.call(this));
+    }, 0);
+    `,
+    answer: 'b',
+    a: '"🥑" and "😍"',
+    b: '"🥑" and "😎"',
+    c: '"😍" and "😎"',
+    d: '"😎" and "😎"',
+    explanation: `
+    The value of the this keyword is dependent on where you use it. In a method, like the getStatus method, the this keyword refers to the object that the method belongs to. The method belongs to the data object, so this refers to the data object. When we log this.status, the status property on the data object gets logged, which is "🥑".
+
+    With the call method, we can change the object to which the this keyword refers. In functions, the this keyword refers to the the object that the function belongs to. We declared the setTimeout function on the global object, so within the setTimeout function, the this keyword refers to the global object. On the global object, there is a variable called status with the value of "😎". When logging this.status, "😎" gets logged.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output',
+    questionText: `
+    const person = {
+      name: 'Lydia',
+      age: 21,
+    };
+    
+    let city = person.city;
+    city = 'Amsterdam';
+    
+    console.log(person);
+    `,
+    answer: 'a',
+    a: '{ name: "Lydia", age: 21 }',
+    b: '{ name: "Lydia", age: 21, city: "Amsterdam" }',
+    c: '{ name: "Lydia", age: 21, city: undefined }',
+    d: '"Amsterdam"',
+    explanation: `
+    We set the variable city equal to the value of the property called city on the person object. There is no property on this object called city, so the variable city has the value of undefined.
+
+    Note that we are not referencing the person object itself! We simply set the variable city equal to the current value of the city property on the person object.
+
+    Then, we set city equal to the string "Amsterdam". This doesn't change the person object: there is no reference to that object.
+
+    When logging the person object, the unmodified object gets returned.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output',
+    questionText: `
+    function checkAge(age) {
+      if (age < 18) {
+        const message = "Sorry, you're too young.";
+      } else {
+        const message = "Yay! You're old enough!";
+      }
+    
+      return message;
+    }
+    
+    console.log(checkAge(21));
+    `,
+    answer: 'c',
+    a: '"Sorry, you\'re too young."',
+    b: '"Yay! You\'re old enough!"',
+    c: 'ReferenceError',
+    d: 'undefined',
+    explanation: `
+    Variables with the const and let keyword are block-scoped. A block is anything between curly brackets ({ }). In this case, the curly brackets of the if/else statements. You cannot reference a variable outside of the block it's declared in, a ReferenceError gets thrown.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What kind of information would get logged?',
+    questionText: `
+    fetch('https://www.website.com/api/user/1')
+    .then(res => res.json())
+    .then(res => console.log(res));
+    `,
+    answer: 'c',
+    a: 'The result of the fetch method.',
+    b: 'The result of the second invocation of the fetch method.',
+    c: 'The result of the callback in the previous .then().',
+    d: 'It would always be undefined.',
+    explanation: `
+    The value of res in the second .then is equal to the returned value of the previous .then. You can keep chaining .thens like this, where the value is passed to the next handler.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'Which option is a way to set hasName equal to true, provided you cannot pass true as an argument?',
+    questionText: `
+    function getName(name) {
+      const hasName = //
+    }
+    `,
+    answer: 'a',
+    a: '!!name',
+    b: 'name',
+    c: 'new Boolean(name)',
+    d: 'name.length',
+    explanation: `
+    With !!name, we determine whether the value of name is truthy or falsy. If name is truthy, which we want to test for, !name returns false. !false (which is what !!name practically is) returns true.
+
+    By setting hasName equal to name, you set hasName equal to whatever value you passed to the getName function, not the boolean value true.
+
+    new Boolean(true) returns an object wrapper, not the boolean value itself.
+
+    name.length returns the length of the passed argument, not whether it's true.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output?',
+    questionText: `
+    console.log('I want pizza'[0]);
+    `,
+    answer: 'b',
+    a: '"""',
+    b: '"I"',
+    c: 'SyntaxError',
+    d: 'undefined',
+    explanation: `
+    In order to get an character on a specific index in a string, you can use bracket notation. The first character in the string has index 0, and so on. In this case we want to get the element which index is 0, the character "I', which gets logged.
+
+    Note that this method is not supported in IE7 and below. In that case, use .charAt()
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output',
+    questionText: `
+    function sum(num1, num2 = num1) {
+      console.log(num1 + num2);
+    }
+    
+    sum(10);
+    `,
+    answer: 'b',
+    a: 'NaN',
+    b: '20',
+    c: 'ReferenceError',
+    d: 'undefined',
+    explanation: `
+    You can set a default parameter's value equal to another parameter of the function, as long as they've been defined before the default parameter. We pass the value 10 to the sum function. If the sum function only receives 1 argument, it means that the value for num2 is not passed, and the value of num1 is equal to the passed value 10 in this case. The default value of num2 is the value of num1, which is 10. num1 + num2 returns 20.
+
+    If you're trying to set a default parameter's value equal to a parameter which is defined after (to the right), the parameter's value hasn't been initialized yet, which will throw an error.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output',
+    questionText: `
+    // module.js
+    export default () => 'Hello world';
+    export const name = 'Lydia';
+
+    // index.js
+    import * as data from './module';
+
+    console.log(data);
+    `,
+    answer: 'a',
+    a: '{ default: function default(), name: "Lydia" }',
+    b: '{ default: function default() }',
+    c: '{ default: "Hello world", name: "Lydia" }',
+    d: 'Global object of module.js',
+    explanation: `
+    With the import * as name syntax, we import all exports from the module.js file into the index.js file as a new object called data is created. In the module.js file, there are two exports: the default export, and a named export. The default export is a function which returns the string "Hello World", and the named export is a variable called name which has the value of the string "Lydia".
+
+    The data object has a default property for the default export, other properties have the names of the named exports and their corresponding values.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output?',
+    questionText: `
+    class Person {
+      constructor(name) {
+        this.name = name;
+      }
+    }
+    
+    const member = new Person('John');
+    console.log(typeof member);
+    `,
+    answer: 'c',
+    a: '"class"',
+    b: '"function"',
+    c: '"object"',
+    d: '"string"',
+    explanation: `
+    Classes are syntactical sugar for function constructors. The equivalent of the Person class as a function constructor would be:
+
+    function Person() {
+      this.name = name;
+    }
+
+    Calling a function constructor with new results in the creation of an instance of Person, typeof keyword returns "object" for an instance. typeof member returns "object".
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output?',
+    questionText: `
+    let newList = [1, 2, 3].push(4);
+
+    console.log(newList.push(5));
+    `,
+    answer: 'd',
+    a: '[1, 2, 3, 4, 5]',
+    b: '[1, 2, 3, 5]',
+    c: '[1, 2, 3, 4',
+    d: 'Error',
+    explanation: `
+    The .push method returns the new length of the array, not the array itself! By setting newList equal to [1, 2, 3].push(4), we set newList equal to the new length of the array: 4.
+
+    Then, we try to use the .push method on newList. Since newList is the numerical value 4, we cannot use the .push method: a TypeError is thrown.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output?',
+    questionText: `
+    function giveLydiaPizza() {
+      return 'Here is pizza!';
+    }
+    
+    const giveLydiaChocolate = () =>
+      "Here's chocolate... now go hit the gym already.";
+    
+    console.log(giveLydiaPizza.prototype);
+    console.log(giveLydiaChocolate.prototype);
+    `,
+    answer: 'd',
+    a: '{ constructor: ...} { constructor: ...}',
+    b: '{} { constructor: ...}',
+    c: '{ constructor: ...} {}',
+    d: '{ constructor: ...} undefined',
+    explanation: `
+    Regular functions, such as the giveLydiaPizza function, have a prototype property, which is an object (prototype object) with a constructor property. Arrow functions however, such as the giveLydiaChocolate function, do not have this prototype property. undefined gets returned when trying to access the prototype property using giveLydiaChocolate.prototype.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output?',
+    questionText: `
+    const person = {
+      name: 'Lydia',
+      age: 21,
+    };
+    
+    for (const [x, y] of Object.entries(person)) {
+      console.log(x, y);
+    }
+    `,
+    answer: 'a',
+    a: 'name Lydia and age 21',
+    b: '["name", "Lydia"] and ["age", 21]',
+    c: '["name", "age"] and undefined',
+    d: 'Error',
+    explanation: `
+    Object.entries(person) returns an array of nested arrays, containing the keys and objects:
+
+    [ [ 'name', 'Lydia' ], [ 'age', 21 ] ]
+
+    Using the for-of loop, we can iterate over each element in the array, the subarrays in this case. We can destructure the subarrays instantly in the for-of loop, using const [x, y]. x is equal to the first element in the subarray, y is equal to the second element in the subarray.
+
+    The first subarray is [ "name", "Lydia" ], with x equal to "name", and y equal to "Lydia", which get logged. The second subarray is [ "age", 21 ], with x equal to "age", and y equal to 21, which get logged.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output?',
+    questionText: `
+    function getItems(fruitList, ...args, favoriteFruit) {
+      return [...fruitList, ...args, favoriteFruit]
+    }
+    
+    getItems(["banana", "apple"], "pear", "orange")
+    `,
+    answer: 'd',
+    a: '["banana", "apple", "pear", "orange"]',
+    b: '[["banana", "apple"], "pear", "orange"]',
+    c: '["banana", "apple", ["pear"], "orange"]',
+    d: 'SyntaxError',
+    explanation: `
+    ...args is a rest parameter. The rest parameter's value is an array containing all remaining arguments, and can only be the last parameter! In this example, the rest parameter was the second parameter. This is not possible, and will throw a syntax error.
+
+    function getItems(fruitList, favoriteFruit, ...args) {
+      return [...fruitList, ...args, favoriteFruit];
+    }
+
+    getItems(['banana', 'apple'], 'pear', 'orange');
+
+    The above example works. This returns the array [ 'banana', 'apple', 'orange', 'pear' ]
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output?',
+    questionText: `
+    function nums(a, b) {
+      if (a > b) console.log('a is bigger');
+      else console.log('b is bigger');
+      return
+      a + b;
+    }
+    
+    console.log(nums(4, 2));
+    console.log(nums(1, 2));
+    `,
+    answer: 'b',
+    a: 'a is bigger, 6 and b is bigger, 3',
+    b: 'a is bigger, undefined and b is bigger, undefined',
+    c: 'undefined and undefined',
+    d: 'SyntaxError',
+    explanation: `
+    In JavaScript, we don't have to write the semicolon (;) explicitly, however the JavaScript engine still adds them after statements. This is called Automatic Semicolon Insertion. A statement can for example be variables, or keywords like throw, return, break, etc.
+
+    Here, we wrote a return statement, and another value a + b on a new line. However, since it's a new line, the engine doesn't know that it's actually the value that we wanted to return. Instead, it automatically added a semicolon after return. You could see this as:
+
+    return;
+    a + b;
+
+    This means that a + b is never reached, since a function stops running after the return keyword. If no value gets returned, like here, the function returns undefined. Note that there is no automatic insertion after if/else statements!
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output?',
+    questionText: `
+    class Person {
+      constructor() {
+        this.name = 'Lydia';
+      }
+    }
+    
+    Person = class AnotherPerson {
+      constructor() {
+        this.name = 'Sarah';
+      }
+    };
+    
+    const member = new Person();
+    console.log(member.name);
+    `,
+    answer: 'b',
+    a: '"Lydia"',
+    b: '"Sarah"',
+    c: 'Error: cannot redeclare Person',
+    d: 'SyntaxError',
+    explanation: `
+    We can set classes equal to other classes/function constructors. In this case, we set Person equal to AnotherPerson. The name on this constructor is Sarah, so the name property on the new Person instance member is "Sarah".
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output?',
+    questionText: `
+    const info = {
+      [Symbol('a')]: 'b',
+    };
+    
+    console.log(info);
+    console.log(Object.keys(info));
+    `,
+    answer: 'd',
+    a: '{Symbol(\'a\'): \'b\'} and ["{Symbol(\'a\')"]',
+    b: '{} and []',
+    c: '{ a: "b" } and ["a"]',
+    d: '{Symbol(\'a\'): \'b\'} and []',
+    explanation: `
+    A Symbol is not enumerable. The Object.keys method returns all enumerable key properties on an object. The Symbol won't be visible, and an empty array is returned. When logging the entire object, all properties will be visible, even non-enumerable ones.
+
+    This is one of the many qualities of a symbol: besides representing an entirely unique value (which prevents accidental name collision on objects, for example when working with 2 libraries that want to add properties to the same object), you can also "hide" properties on objects this way (although not entirely. You can still access symbols using the Object.getOwnPropertySymbols() method).
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output?',
+    questionText: `
+    const getList = ([x, ...y]) => [x, y]
+    const getUser = user => { name: user.name, age: user.age }
+
+    const list = [1, 2, 3, 4]
+    const user = { name: "Lydia", age: 21 }
+
+    console.log(getList(list))
+    console.log(getUser(user))
+    `,
+    answer: 'a',
+    a: '[1, [2, 3, 4]] and undefined',
+    b: '[1, [2, 3, 4]] and { name: "Lydia", age: 21 }',
+    c: '[1, 2, 3, 4] and { name: "Lydia", age: 21 }',
+    d: 'Error and { name: "Lydia", age: 21 }',
+    explanation: `
+    The getList function receives an array as its argument. Between the parentheses of the getList function, we destructure this array right away. You could see this as:
+
+    [x, ...y] = [1, 2, 3, 4]
+
+    With the rest parameter ...y, we put all "remaining" arguments in an array. The remaining arguments are 2, 3 and 4 in this case. The value of y is an array, containing all the rest parameters. The value of x is equal to 1 in this case, so when we log [x, y], [1, [2, 3, 4]] gets logged.
+
+    The getUser function receives an object. With arrow functions, we don't have to write curly brackets if we just return one value. However, if you want to return an object from an arrow function, you have to write it between parentheses, otherwise no value gets returned! The following function would have returned an object:
+
+    const getUser = user => ({ name: user.name, age: user.age })
+
+    Since no value gets returned in this case, the function returns undefined.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output?',
+    questionText: `
+    const name = 'Lydia';
+
+    console.log(name());
+    `,
+    answer: 'c',
+    a: 'SyntaxError',
+    b: 'ReferenceError',
+    c: 'TypeError',
+    d: 'undefined',
+    explanation: `
+    The variable name holds the value of a string, which is not a function, thus cannot invoke.
+
+    TypeErrors get thrown when a value is not of the expected type. JavaScript expected name to be a function since we're trying to invoke it. It was a string however, so a TypeError gets thrown: name is not a function!
+
+    SyntaxErrors get thrown when you've written something that isn't valid JavaScript, for example when you've written the word return as retrun. ReferenceErrors get thrown when JavaScript isn't able to find a reference to a value that you're trying to access.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: '',
+    questionText: `
+    const output = \`${[] && 'Im'}possible!
+    You should${'' && 'n"t'} see a therapist after so much JavaScript lol\`;
+    `,
+    answer: 'b',
+    a: 'possible! You should see a therapist after so much JavaScript lol',
+    b: 'Impossible! You should see a therapist after so much JavaScript lol',
+    c: 'possible! You shouldn\'t see a therapist after so much JavaScript lol',
+    d: 'Impossible! You shouldn\'t see a therapist after so much JavaScript lol',
+    explanation: `
+    [] is a truthy value. With the && operator, the right-hand value will be returned if the left-hand value is a truthy value. In this case, the left-hand value [] is a truthy value, so "Im' gets returned.
+
+    "" is a falsy value. If the left-hand value is falsy, nothing gets returned. n't doesn't get returned.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the value of output?',
+    questionText: `
+    const one = false || {} || null;
+    const two = null || false || '';
+    const three = [] || 0 || true;
+
+    console.log(one, two, three);
+    `,
+    answer: 'c',
+    a: 'false null []',
+    b: 'null "" true',
+    c: '{} "" []',
+    d: 'null null true',
+    explanation: `
+    With the || operator, we can return the first truthy operand. If all values are falsy, the last operand gets returned.
+
+    (false || {} || null): the empty object {} is a truthy value. This is the first (and only) truthy value, which gets returned. one is equal to {}.
+
+    (null || false || ""): all operands are falsy values. This means that the last operand, "" gets returned. two is equal to "".
+
+    ([] || 0 || ""): the empty array[] is a truthy value. This is the first truthy value, which gets returned. three is equal to [].
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the value of output?',
+    questionText: `
+    const myPromise = () => Promise.resolve('I have resolved!');
+
+    function firstFunction() {
+      myPromise().then(res => console.log(res));
+      console.log('second');
+    }
+
+    async function secondFunction() {
+      console.log(await myPromise());
+      console.log('second');
+    }
+
+    firstFunction();
+    secondFunction();
+    `,
+    answer: 'd',
+    a: 'I have resolved!, second and I have resolved!, second',
+    b: 'second, I have resolved! and second, I have resolved!',
+    c: 'I have resolved!, second and second, I have resolved!',
+    d: 'second, I have resolved! and I have resolved!, second',
+    explanation: `
+    With a promise, we basically say I want to execute this function, but I'll put it aside for now while it's running since this might take a while. Only when a certain value is resolved (or rejected), and when the call stack is empty, I want to use this value.
+
+    We can get this value with both .then and the await keyword in an async function. Although we can get a promise's value with both .then and await, they work a bit differently.
+
+    In the firstFunction, we (sort of) put the myPromise function aside while it was running, but continued running the other code, which is console.log('second') in this case. Then, the function resolved with the string I have resolved, which then got logged after it saw that the callstack was empty.
+
+    With the await keyword in secondFunction, we literally pause the execution of an async function until the value has been resolved before moving to the next line.
+
+    This means that it waited for the myPromise to resolve with the value I have resolved, and only once that happened, we moved to the next line: second got logged.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the value of output?',
+    questionText: `
+    const set = new Set();
+
+    set.add(1);
+    set.add('Lydia');
+    set.add({ name: 'Lydia' });
+
+    for (let item of set) {
+      console.log(item + 2);
+    }
+    `,
+    answer: 'c',
+    a: '3, NaN, NaN',
+    b: '3, 7, NaN',
+    c: '3, Lydia2, [object Object]2',
+    d: '"12", Lydia2, [object Object]2',
+    explanation: `
+    The + operator is not only used for adding numerical values, but we can also use it to concatenate strings. Whenever the JavaScript engine sees that one or more values are not a number, it coerces the number into a string.
+
+    The first one is 1, which is a numerical value. 1 + 2 returns the number 3.
+
+    However, the second one is a string "Lydia". "Lydia" is a string and 2 is a number: 2 gets coerced into a string. "Lydia" and "2" get concatenated, which results in the string "Lydia2".
+
+    { name: "Lydia" } is an object. Neither a number nor an object is a string, so it stringifies both. Whenever we stringify a regular object, it becomes "[object Object]". "[object Object]" concatenated with "2" becomes "[object Object]2".
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is its value?',
+    questionText: `
+    Promise.resolve(5);
+    `,
+    answer: 'c',
+    a: '5',
+    b: 'Promise {<pending>: 5}',
+    c: 'Promise {<fulfilled>: 5}',
+    d: 'Error',
+    explanation: `
+    We can pass any type of value we want to Promise.resolve, either a promise or a non-promise. The method itself returns a promise with the resolved value (<fulfilled>). If you pass a regular function, it'll be a resolved promise with a regular value. If you pass a promise, it'll be a resolved promise with the resolved value of that passed promise.
+
+    In this case, we just passed the numerical value 5. It returns a resolved promise with the value 5.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is its value?',
+    questionText: `
+    function compareMembers(person1, person2 = person) {
+      if (person1 !== person2) {
+        console.log('Not the same!');
+      } else {
+        console.log('They are the same!');
+      }
+    }
+    
+    const person = { name: 'Lydia' };
+    
+    compareMembers(person);
+    `,
+    answer: 'b',
+    a: 'Not the same!',
+    b: 'They are the same!',
+    c: 'ReferenceError',
+    d: 'SyntaxError',
+    explanation: `
+    Objects are passed by reference. When we check objects for strict equality (===), we're comparing their references.
+
+    We set the default value for person2 equal to the person object, and passed the person object as the value for person1.
+
+    This means that both values have a reference to the same spot in memory, thus they are equal.
+
+    The code block in the else statement gets run, and They are the same! gets logged.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is its value?',
+    questionText: `
+    const colorConfig = {
+      red: true,
+      blue: false,
+      green: true,
+      black: true,
+      yellow: false,
+    };
+    
+    const colors = ['pink', 'red', 'blue'];
+    
+    console.log(colorConfig.colors[1]);
+    `,
+    answer: 'd',
+    a: 'true',
+    b: 'false',
+    c: 'undefined',
+    d: 'TypeError',
+    explanation: `
+    In JavaScript, we have two ways to access properties on an object: bracket notation, or dot notation. In this example, we use dot notation (colorConfig.colors) instead of bracket notation (colorConfig["colors"]).
+
+    With dot notation, JavaScript tries to find the property on the object with that exact name. In this example, JavaScript tries to find a property called colors on the colorConfig object. There is no property called colors, so this returns undefined. Then, we try to access the value of the first element by using [1]. We cannot do this on a value that's undefined, so it throws a TypeError: Cannot read property '1' of undefined.
+
+    JavaScript interprets (or unboxes) statements. When we use bracket notation, it sees the first opening bracket [ and keeps going until it finds the closing bracket ]. Only then, it will evaluate the statement. If we would've used colorConfig[colors[1]], it would have returned the value of the red property on the colorConfig object.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is its value?',
+    questionText: `
+    console.log('❤️' === '❤️');
+    `,
+    answer: 'A',
+    a: 'true',
+    b: 'false',
+    c: 'tralse',
+    d: 'frue',
+    explanation: `
+    Under the hood, emojis are unicodes. The unicodes for the heart emoji is "U+2764 U+FE0F". These are always the same for the same emojis, so we're comparing two equal strings to each other, which returns true.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'Which of these methods modifies the original array?',
+    questionText: `
+    const emojis = ['✨', '🥑', '😍'];
+
+    emojis.map(x => x + '✨');
+    emojis.filter(x => x !== '🥑');
+    emojis.find(x => x !== '🥑');
+    emojis.reduce((acc, cur) => acc + '✨');
+    emojis.slice(1, 2, '✨');
+    emojis.splice(1, 2, '✨');
+    `,
+    answer: 'd',
+    a: 'All of them',
+    b: 'map reduce slice splice',
+    c: 'map slice splice',
+    d: 'splice',
+    explanation: `
+    With splice method, we modify the original array by deleting, replacing or adding elements. In this case, we removed 2 items from index 1 (we removed '🥑' and '😍') and added the ✨ emoji instead.
+
+    map, filter and slice return a new array, find returns an element, and reduce returns a reduced value.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output?',
+    questionText: `
+    const food = ['🍕', '🍫', '🥑', '🍔'];
+    const info = { favoriteFood: food[0] };
+
+    info.favoriteFood = '🍝';
+
+    console.log(food);
+    `,
+    answer: 'a',
+    a: '[\'🍕\', \'🍫\', \'🥑\', \'🍔\']',
+    b: '[\'🍝\', \'🍫\', \'🥑\', \'🍔\']',
+    c: '[\'🍝\', \'🍕\', \'🍫\', \'🥑\', \'🍔\']',
+    d: 'ReferenceError',
+    explanation: `
+    We set the value of the favoriteFood property on the info object equal to the string with the pizza emoji, '🍕'. A string is a primitive data type. In JavaScript, primitive data types don't interact by reference.
+
+    In JavaScript, primitive data types (everything that's not an object) interact by value. In this case, we set the value of the favoriteFood property on the info object equal to the value of the first element in the food array, the string with the pizza emoji in this case ('🍕'). A string is a primitive data type, and interact by value (see my blogpost if you're interested in learning more)
+
+    Then, we change the value of the favoriteFood property on the info object. The food array hasn't changed, since the value of favoriteFood was merely a copy of the value of the first element in the array, and doesn't have a reference to the same spot in memory as the element on food[0]. When we log food, it's still the original array, ['🍕', '🍫', '🥑', '🍔'].
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What does this method do?',
+    questionText: `
+    JSON.parse();
+    `,
+    answer: 'a',
+    a: 'Parses JSON to a JavaScript value',
+    b: 'Parses a JavaScript object to JSON',
+    c: 'Parses any JavaScript value to JSON',
+    d: 'Parses JSON to a JavaScript object only',
+    explanation: `
+    // Stringifying a number into valid JSON, then parsing the JSON string to a JavaScript value:
+    const jsonNumber = JSON.stringify(4); // '4'
+    JSON.parse(jsonNumber); // 4
+
+    // Stringifying an array value into valid JSON, then parsing the JSON string to a JavaScript value:
+    const jsonArray = JSON.stringify([1, 2, 3]); // '[1, 2, 3]'
+    JSON.parse(jsonArray); // [1, 2, 3]
+
+    // Stringifying an object  into valid JSON, then parsing the JSON string to a JavaScript value:
+    const jsonArray = JSON.stringify({ name: 'Lydia' }); // '{"name":"Lydia"}'
+    JSON.parse(jsonArray); // { name: 'Lydia' }
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output?',
+    questionText: `
+    let name = 'Lydia';
+
+    function getName() {
+      console.log(name);
+      let name = 'Sarah';
+    }
+
+    getName();
+    `,
+    answer: 'd',
+    a: 'Lydia',
+    b: 'Sarah',
+    c: 'undefined',
+    d: 'RefrenceError',
+    explanation: `
+    Each function has its own execution context (or scope). The getName function first looks within its own context (scope) to see if it contains the variable name we're trying to access. In this case, the getName function contains its own name variable: we declare the variable name with the let keyword, and with the value of 'Sarah'.
+
+    Variables with the let keyword (and const) are hoisted, but unlike var, don't get initialized. They are not accessible before the line we declare (initialize) them. This is called the "temporal dead zone". When we try to access the variables before they are declared, JavaScript throws a ReferenceError.
+
+    If we wouldn't have declared the name variable within the getName function, the javascript engine would've looked down the scope chain. The outer scope has a variable called name with the value of Lydia. In that case, it would've logged Lydia.
+
+    let name = 'Lydia';
+
+    function getName() {
+      console.log(name);
+    }
+
+    getName(); // Lydia
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output?',
+    questionText: `
+    function* generatorOne() {
+      yield ['a', 'b', 'c'];
+    }
+    
+    function* generatorTwo() {
+      yield* ['a', 'b', 'c'];
+    }
+    
+    const one = generatorOne();
+    const two = generatorTwo();
+    
+    console.log(one.next().value);
+    console.log(two.next().value);
+    `,
+    answer: 'c',
+    a: 'a and a',
+    b: 'a and undefined',
+    c: '[\'a\', \'b\', \'c\'] and a',
+    d: 'a and [\'a\', \'b\', \'c\']',
+    explanation: `
+    With the yield keyword, we yield values in a generator function. With the yield* keyword, we can yield values from another generator function, or iterable object (for example an array).
+
+    In generatorOne, we yield the entire array ['a', 'b', 'c'] using the yield keyword. The value of value property on the object returned by the next method on one (one.next().value) is equal to the entire array ['a', 'b', 'c'].
+
+    console.log(one.next().value); // ['a', 'b', 'c']
+    console.log(one.next().value); // undefined
+
+    In generatorTwo, we use the yield* keyword. This means that the first yielded value of two, is equal to the first yielded value in the iterator. The iterator is the array ['a', 'b', 'c']. The first yielded value is a, so the first time we call two.next().value, a is returned.
+
+    console.log(two.next().value); // 'a'
+    console.log(two.next().value); // 'b'
+    console.log(two.next().value); // 'c'
+    console.log(two.next().value); // undefined
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output?',
+    questionText: `
+    console.log(\`\${(x => x)('I love')} to program\`);
+    `,
+    answer: 'a',
+    a: 'I love to program',
+    b: 'undefined to program',
+    c: '\${(x => x)(\'I love\') to program',
+    d: 'TypeError',
+    explanation: `
+    Expressions within template literals are evaluated first. This means that the string will contain the returned value of the expression, the immediately invoked function (x => x)('I love') in this case. We pass the value 'I love' as an argument to the x => x arrow function. x is equal to 'I love', which gets returned. This results in I love to program.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What will happen?',
+    questionText: `
+    let config = {
+      alert: setInterval(() => {
+        console.log('Alert!');
+      }, 1000),
+    };
+    
+    config = null;
+    `,
+    answer: 'c',
+    a: 'The setInterval callback won\'t be invoked',
+    b: 'The setInterval callback gets invoked once',
+    c: 'The setInterval callback will still be called every second',
+    d: 'We never invoked config.alert(), config is null',
+    explanation: `
+    Normally when we set objects equal to null, those objects get garbage collected as there is no reference anymore to that object. However, since the callback function within setInterval is an arrow function (thus bound to the config object), the callback function still holds a reference to the config object. As long as there is a reference, the object won't get garbage collected. Since this is an interval, setting config to null or delete-ing config.alert won't garbage-collect the interval, so the interval will still be called. It should be cleared with clearInterval(config.alert) to remove it from memory. Since it was not cleared, the setInterval callback function will still get invoked every 1000ms (1s).
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'Which method(s) will return the value \'Hello world!\'?',
+    questionText: `
+    const myMap = new Map();
+    const myFunc = () => 'greeting';
+
+    myMap.set(myFunc, 'Hello world!');
+
+    //1
+    myMap.get('greeting');
+    //2
+    myMap.get(myFunc);
+    //3
+    myMap.get(() => 'greeting');
+    `,
+    answer: 'b',
+    a: '1',
+    b: '2',
+    c: '2 and 3',
+    d: 'All of them',
+    explanation: `
+    When adding a key/value pair using the set method, the key will be the value of the first argument passed to the set function, and the value will be the second argument passed to the set function. The key is the function () => 'greeting' in this case, and the value 'Hello world'. myMap is now { () => 'greeting' => 'Hello world!' }.
+
+    1 is wrong, since the key is not 'greeting' but () => 'greeting'. 3 is wrong, since we're creating a new function by passing it as a parameter to the get method. Object interact by reference. Functions are objects, which is why two functions are never strictly equal, even if they are identical: they have a reference to a different spot in memory.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output?',
+    questionText: `
+    const person = {
+      name: 'Lydia',
+      age: 21,
+    };
+    
+    const changeAge = (x = { ...person }) => (x.age += 1);
+    const changeAgeAndName = (x = { ...person }) => {
+      x.age += 1;
+      x.name = 'Sarah';
+    };
+    
+    changeAge(person);
+    changeAgeAndName();
+    
+    console.log(person);
+    `,
+    answer: 'c',
+    a: '{name: "Sarah", age: 22}',
+    b: '{name: "Sarah", age: 23}',
+    c: '{name: "Lydia", age: 22}',
+    d: '{name: "Lydia", age: 23}',
+    explanation: `
+    Both the changeAge and changeAgeAndName functions have a default parameter, namely a newly created object { ...person }. This object has copies of all the key/values in the person object.
+
+    First, we invoke the changeAge function and pass the person object as its argument. This function increases the value of the age property by 1. person is now { name: "Lydia", age: 22 }.
+
+    Then, we invoke the changeAgeAndName function, however we don't pass a parameter. Instead, the value of x is equal to a new object: { ...person }. Since it's a new object, it doesn't affect the values of the properties on the person object. person is still equal to { name: "Lydia", age: 22 }.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'Which of the following options will return 6?',
+    questionText: `
+    function sumValues(x, y, z) {
+      return x + y + z;
+    }
+    `,
+    answer: 'c',
+    a: 'sumValues([...1, 2, 3])',
+    b: 'sumValues([...[1, 2, 3]])',
+    c: 'sumValues(...[1, 2, 3])',
+    d: 'sumValues([1, 2, 3])',
+    explanation: `
+    With the spread operator ..., we can spread iterables to individual elements. The sumValues function receives three arguments: x, y and z. ...[1, 2, 3] will result in 1, 2, 3, which we pass to the sumValues function.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output?',
+    questionText: `
+    let num = 1;
+    const list = ['🥳', '🤠', '🥰', '🤪'];
+
+    console.log(list[(num += 1)]);
+    `,
+    answer: 'b',
+    a: '🤠',
+    b: '🥰',
+    c: 'SyntaxError',
+    d: 'ReferenceError',
+    explanation: `
+    With the += operand, we're incrementing the value of num by 1. num had the initial value 1, so 1 + 1 is 2. The item on the second index in the list array is 🥰, console.log(list[2]) prints 🥰
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output?',
+    questionText: `
+    const person = {
+      firstName: 'Lydia',
+      lastName: 'Hallie',
+      pet: {
+        name: 'Mara',
+        breed: 'Dutch Tulip Hound',
+      },
+      getFullName() {
+        return \`\${this.firstName} \${this.lastName}\`;
+      },
+    };
+    
+    console.log(person.pet?.name);
+    console.log(person.pet?.family?.name);
+    console.log(person.getFullName?.());
+    console.log(member.getLastName?.());
+    `,
+    answer: 'b',
+    a: 'undefined undefined undefined undefined',
+    b: 'Mara undefined Lydia Hallie ReferenceError',
+    c: 'Mara null Lydia Hallie null',
+    d: 'null ReferenceError null ReferenceError',
+    explanation: `
+    With the optional chaining operator ?., we no longer have to explicitly check whether the deeper nested values are valid or not. If we're trying to access a property on an undefined or null value (nullish), the expression short-circuits and returns undefined.
+
+    person.pet?.name: person has a property named pet: person.pet is not nullish. It has a property called name, and returns Mara. person.pet?.family?.name: person has a property named pet: person.pet is not nullish. pet does not have a property called family, person.pet.family is nullish. The expression returns undefined. person.getFullName?.(): person has a property named getFullName: person.getFullName() is not nullish and can get invoked, which returns Lydia Hallie. member.getLastName?.(): member is not defined: member.getLastName() is nullish. The expression returns undefined.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output?',
+    questionText: `
+    const groceries = ['banana', 'apple', 'peanuts'];
+
+    if (groceries.indexOf('banana')) {
+      console.log('We have to buy bananas!');
+    } else {
+      console.log(\`We don't have to buy bananas!\`);
+    }
+    `,
+    answer: 'b',
+    a: 'We have to buy bananas!',
+    b: 'We don\'t have to buy bananas',
+    c: 'undefined',
+    d: '1',
+    explanation: `
+    We passed the condition groceries.indexOf("banana") to the if-statement. groceries.indexOf("banana") returns 0, which is a falsy value. Since the condition in the if-statement is falsy, the code in the else block runs, and We don't have to buy bananas! gets logged.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output?',
+    questionText: `
+    const config = {
+      languages: [],
+      set language(lang) {
+        return this.languages.push(lang);
+      },
+    };
+    
+    console.log(config.language);
+    `,
+    answer: 'd',
+    a: 'function language(lang) { this.languages.push(lang }',
+    b: '0',
+    c: '[]',
+    d: 'undefined',
+    explanation: `
+    The language method is a setter. Setters don't hold an actual value, their purpose is to modify properties. When calling a setter method, undefined gets returned.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What\'s the output?',
+    questionText: `
+    const name = 'Lydia Hallie';
+
+    console.log(!typeof name === 'object');
+    console.log(!typeof name === 'string');
+    `,
+    answer: 'c',
+    a: 'false true',
+    b: 'true false',
+    c: 'false false',
+    d: 'true true',
+    explanation: `
+    typeof name returns "string". The string "string" is a truthy value, so !typeof name returns the boolean value false. false === "object" and false === "string" both returnfalse.
+
+    (If we wanted to check whether the type was (un)equal to a certain type, we should've written !== instead of !typeof)
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output?',
+    questionText: `
+    const add = x => y => z => {
+      console.log(x, y, z);
+      return x + y + z;
+    };
+    
+    add(4)(5)(6);
+    `,
+    answer: 'a',
+    a: '4 5 6',
+    b: '6 5 4',
+    c: '4 function function',
+    d: 'udnefined undefined 6',
+    explanation: `
+    The add function returns an arrow function, which returns an arrow function, which returns an arrow function (still with me?). The first function receives an argument x with the value of 4. We invoke the second function, which receives an argument y with the value 5. Then we invoke the third function, which receives an argument z with the value 6. When we're trying to access the value x, y and z within the last arrow function, the JS engine goes up the scope chain in order to find the values for x and y accordingly. This returns 4 5 6.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output?',
+    questionText: `
+    async function* range(start, end) {
+      for (let i = start; i <= end; i++) {
+        yield Promise.resolve(i);
+      }
+    }
+    
+    (async () => {
+      const gen = range(1, 3);
+      for await (const item of gen) {
+        console.log(item);
+      }
+    })();
+    `,
+    answer: 'c',
+    a: 'Promise {1} Promise {2} Promise {3}',
+    b: 'Promise {<pending>} Promise {<pending>} Promise {<pending>}',
+    c: '1 2 3',
+    d: 'undefined undefined undefined',
+    explanation: `
+    The generator function range returns an async object with promises for each item in the range we pass: Promise{1}, Promise{2}, Promise{3}. We set the variable gen equal to the async object, after which we loop over it using a for await ... of loop. We set the variable item equal to the returned Promise values: first Promise{1}, then Promise{2}, then Promise{3}. Since we're awaiting the value of item, the resolved promise, the resolved values of the promises get returned: 1, 2, then 3.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output?',
+    questionText: `
+    const myFunc = ({ x, y, z }) => {
+      console.log(x, y, z);
+    };
+    
+    myFunc(1, 2, 3);
+    `,
+    answer: 'd',
+    a: '1 2 3',
+    b: '{1: 1} {2: 2} {3: 3}',
+    c: '{ 1: undefined } undefined undefined',
+    d: 'undefined undefined undefined',
+    explanation: `
+    myFunc expects an object with properties x, y and z as its argument. Since we're only passing three separate numeric values (1, 2, 3) instead of one object with properties x, y and z ({x: 1, y: 2, z: 3}), x, y and z have their default value of undefined.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output?',
+    questionText: `
+    function getFine(speed, amount) {
+      const formattedSpeed = new Intl.NumberFormat('en-US', {
+        style: 'unit',
+        unit: 'mile-per-hour'
+      }).format(speed);
+    
+      const formattedAmount = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD'
+      }).format(amount);
+    
+      return \`The driver drove \${formattedSpeed} and has to pay \${formattedAmount}\`;
+    }
+    
+    console.log(getFine(130, 300))
+    `,
+    answer: 'b',
+    a: 'The driver drove 130 and has to pay 300',
+    b: 'The driver drove 130 mph and has to pay $300.00',
+    c: 'The driver drove undefined and has to pay undefined',
+    d: 'The driver drove 130.00 and has to pay 300.00',
+    explanation: `
+    With the Intl.NumberFormat method, we can format numeric values to any locale. We format the numeric value 130 to the en-US locale as a unit in mile-per-hour, which results in 130 mph. The numeric value 300 to the en-US locale as a currency in USD results in $300.00.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output?',
+    questionText: `
+    const spookyItems = ['👻', '🎃', '🕸'];
+    ({ item: spookyItems[3] } = { item: '💀' });
+
+    console.log(spookyItems);
+    `,
+    answer: 'b',
+    a: '["👻", "🎃", "🕸"]',
+    b: '["👻", "🎃", "🕸", "💀"]',
+    c: '["👻", "🎃", "🕸", { item: "💀" }]',
+    d: '["👻", "🎃", "🕸", "[object Object]"]',
+    explanation: `
+    By destructuring objects, we can unpack values from the right-hand object, and assign the unpacked value to the value of the same property name on the left-hand object. In this case, we're assigning the value "💀" to spookyItems[3]. This means that we're modifying the spookyItems array, we're adding the "💀" to it. When logging spookyItems, ["👻", "🎃", "🕸", "💀"] gets logged.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output?',
+    questionText: `
+    const name = 'Lydia Hallie';
+    const age = 21;
+
+    console.log(Number.isNaN(name));
+    console.log(Number.isNaN(age));
+
+    console.log(isNaN(name));
+    console.log(isNaN(age));
+    `,
+    answer: 'c',
+    a: 'true false true false',
+    b: 'true false false false',
+    c: 'false false true false',
+    d: 'false true false true',
+    explanation: `
+    With the Number.isNaN method, you can check if the value you pass is a numeric value and equal to NaN. name is not a numeric value, so Number.isNaN(name) returns false. age is a numeric value, but is not equal to NaN, so Number.isNaN(age) returns false.
+
+    With the isNaN method, you can check if the value you pass is not a number. name is not a number, so isNaN(name) returns true. age is a number, so isNaN(age) returns false.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output',
+    questionText: `
+    const randomValue = 21;
+
+    function getInfo() {
+      console.log(typeof randomValue);
+      const randomValue = 'Lydia Hallie';
+    }
+
+    getInfo();
+    `,
+    answer: 'd',
+    a: '"number"',
+    b: '"string"',
+    c: 'undefined',
+    d: 'ReferenceError',
+    explanation: `
+    Variables declared with the const keyword are not referencable before their initialization: this is called the temporal dead zone. In the getInfo function, the variable randomValue is scoped in the functional scope of getInfo. On the line where we want to log the value of typeof randomValue, the variable randomValue isn't initialized yet: a ReferenceError gets thrown! The engine didn't go down the scope chain since we declared the variable randomValue in the getInfo function.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output?',
+    questionText: `
+    const myPromise = Promise.resolve('Woah some cool data');
+
+    (async () => {
+      try {
+        console.log(await myPromise);
+      } catch {
+        throw new Error(\`Oops didn't work\`);
+      } finally {
+        console.log('Oh finally!');
+      }
+    })();
+    `,
+    answer: 'c',
+    a: 'Woah some cool data',
+    b: 'Oh finally!',
+    c: 'Woah some cool data Oh finally!',
+    d: 'Oops didn\'t work Oh finally!',
+    explanation: `
+    In the try block, we're logging the awaited value of the myPromise variable: "Woah some cool data". Since no errors were thrown in the try block, the code in the catch block doesn't run. The code in the finally block always runs, "Oh finally!" gets logged.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output?',
+    questionText: `
+    const emojis = ['🥑', ['✨', '✨', ['🍕', '🍕']]];
+
+    console.log(emojis.flat(1));
+    `,
+    answer: 'b',
+    a: '[\'🥑\', [\'✨\', \'✨\', [\'🍕\', \'🍕\']]]',
+    b: '[\'🥑\', \'✨\', \'✨\', [\'🍕\', \'🍕\']]',
+    c: '[\'🥑\', [\'✨\', \'✨\', \'🍕\', \'🍕\']]',
+    d: '[\'🥑\', \'✨\', \'✨\', \'🍕\', \'🍕\']',
+    explanation: `
+    With the flat method, we can create a new, flattened array. The depth of the flattened array depends on the value that we pass. In this case, we passed the value 1 (which we didn't have to, that's the default value), meaning that only the arrays on the first depth will be concatenated. ['🥑'] and ['✨', '✨', ['🍕', '🍕']] in this case. Concatenating these two arrays results in ['🥑', '✨', '✨', ['🍕', '🍕']].
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output?',
+    questionText: `
+    class Counter {
+      constructor() {
+        this.count = 0;
+      }
+    
+      increment() {
+        this.count++;
+      }
+    }
+    
+    const counterOne = new Counter();
+    counterOne.increment();
+    counterOne.increment();
+    
+    const counterTwo = counterOne;
+    counterTwo.increment();
+    
+    console.log(counterOne.count);
+    `,
+    answer: 'd',
+    a: '0',
+    b: '1',
+    c: '2',
+    d: '3',
+    explanation: `
+    counterOne is an instance of the Counter class. The counter class contains a count property on its constructor, and an increment method. First, we invoked the increment method twice by calling counterOne.increment(). Currently, counterOne.count is 2.
+
+    Then, we create a new variable counterTwo, and set it equal to counterOne. Since objects interact by reference, we're just creating a new reference to the same spot in memory that counterOne points to. Since it has the same spot in memory, any changes made to the object that counterTwo has a reference to, also apply to counterOne. Currently, counterTwo.count is 2.
+
+    We invoke the counterTwo.increment(), which sets the count to 3. Then, we log the count on counterOne, which logs 3.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output?',
+    questionText: `
+    const myPromise = Promise.resolve(Promise.resolve('Promise!'));
+
+    function funcOne() {
+      myPromise.then(res => res).then(res => console.log(res));
+      setTimeout(() => console.log('Timeout!'), 0);
+      console.log('Last line!');
+    }
+
+    async function funcTwo() {
+      const res = await myPromise;
+      console.log(await res);
+      setTimeout(() => console.log('Timeout!'), 0);
+      console.log('Last line!');
+    }
+
+    funcOne();
+    funcTwo();
+    `,
+    answer: 'd',
+    a: 'Promise! Last line! Promise! Last line! Last line! Promise!',
+    b: 'Last line! Timeout! Promise! Last line! Timeout! Promise!',
+    c: 'Promise! Last line! Last line! Promise! Timeout! Timeout!',
+    d: 'Last line! Promise! Promise! Last line! Timeout! Timeout!',
+    explanation: `
+    First, we invoke funcOne. On the first line of funcOne, we call the myPromise promise, which is an asynchronous operation. While the engine is busy completing the promise, it keeps on running the function funcOne. The next line is the asynchronous setTimeout function, from which the callback is sent to the Web API. (see my article on the event loop here.)
+
+    Both the promise and the timeout are asynchronous operations, the function keeps on running while it's busy completing the promise and handling the setTimeout callback. This means that Last line! gets logged first, since this is not an asynchonous operation. This is the last line of funcOne, the promise resolved, and Promise! gets logged. However, since we're invoking funcTwo(), the call stack isn't empty, and the callback of the setTimeout function cannot get added to the callstack yet.
+
+    In funcTwo we're, first awaiting the myPromise promise. With the await keyword, we pause the execution of the function until the promise has resolved (or rejected). Then, we log the awaited value of res (since the promise itself returns a promise). This logs Promise!.
+
+    The next line is the asynchronous setTimeout function, from which the callback is sent to the Web API.
+
+    We get to the last line of funcTwo, which logs Last line! to the console. Now, since funcTwo popped off the call stack, the call stack is empty. The callbacks waiting in the queue (() => console.log("Timeout!") from funcOne, and () => console.log("Timeout!") from funcTwo) get added to the call stack one by one. The first callback logs Timeout!, and gets popped off the stack. Then, the second callback logs Timeout!, and gets popped off the stack. This logs Last line! Promise! Promise! Last line! Timeout! Timeout!
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'How can we invoke sum in sum.js from index.js?',
+    questionText: `
+    // sum.js
+    export default function sum(x) {
+      return x + x;
+    }
+
+    // index.js
+    import * as sum from './sum';
+    `,
+    answer: 'c',
+    a: 'sum(4)',
+    b: 'sum.sum(4)',
+    c: 'sum.default(4)',
+    d: 'Default aren\'t imported with *, only named exports',
+    explanation: `
+    With the asterisk *, we import all exported values from that file, both default and named. If we had the following file:
+
+    // info.js
+    export const name = 'Lydia';
+    export const age = 21;
+    export default 'I love JavaScript';
+
+    // index.js
+    import * as info from './info';
+    console.log(info);
+
+    The following would get logged:
+
+    {
+      default: "I love JavaScript",
+      name: "Lydia",
+      age: 21
+    }
+
+    For the sum example, it means that the imported value sum looks like this:
+
+    { default: function sum(x) { return x + x } }
+
+    We can invoke this function, by calling sum.default
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output?',
+    questionText: `
+    const handler = {
+      set: () => console.log('Added a new property!'),
+      get: () => console.log('Accessed a property!'),
+    };
+    
+    const person = new Proxy({}, handler);
+    
+    person.name = 'Lydia';
+    person.name;
+    `,
+    answer: 'c',
+    a: 'Added a new property!',
+    b: 'Accessed a property!',
+    c: 'Added a new property! Accessed a property!',
+    d: 'Nothing gets logged',
+    explanation: `
+    With a Proxy object, we can add custom behavior to an object that we pass to it as the second argument. In this case, we pass the handler object which contained two properties: set and get. set gets invoked whenever we set property values, get gets invoked whenever we get (access) property values.
+
+    The first argument is an empty object {}, which is the value of person. To this object, the custom behavior specified in the handler object gets added. If we add a property to the person object, set will get invoked. If we access a property on the person object, get gets invoked.
+
+    First, we added a new property name to the proxy object (person.name = "Lydia"). set gets invoked, and logs "Added a new property!".
+
+    Then, we access a property value on the proxy object, the get property on the handler object got invoked. "Accessed a property!" gets logged.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'Which of the following will modify the person object?',
+    questionText: `
+    const person = { name: 'Lydia Hallie' };
+
+    Object.seal(person);
+    `,
+    answer: 'a',
+    a: 'person.name = "Evan Bacon"',
+    b: 'person.age = 21',
+    c: 'delete person.name',
+    d: 'Object.assign(person, { age: 21 })',
+    explanation: `
+    With Object.seal we can prevent new properies from being added, or existing properties to be removed.
+
+    However, you can still modify the value of existing properties.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'Which of the following will modify the person object?',
+    questionText: `
+    const person = {
+      name: 'Lydia Hallie',
+      address: {
+        street: '100 Main St',
+      },
+    };
+    
+    Object.freeze(person);
+    `,
+    answer: 'c',
+    a: 'person.name = "Evan Bacon"',
+    b: 'delete person.address',
+    c: 'person.address.street = "101 Main St"',
+    d: 'person.pet = { name: "Mara" }',
+    explanation: `
+    The Object.freeze method freezes an object. No properties can be added, modified, or removed.
+
+    However, it only shallowly freezes the object, meaning that only direct properties on the object are frozen. If the property is another object, like address in this case, the properties on that object aren't frozen, and can be modified.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output?',
+    questionText: `
+    const add = x => x + x;
+
+    function myFunc(num = 2, value = add(num)) {
+      console.log(num, value);
+    }
+
+    myFunc();
+    myFunc(3);
+    `,
+    answer: 'a',
+    a: '2 4 and 3 6',
+    b: '2 NaN and 3 NaN',
+    c: '2 Error and 3 6',
+    d: '2 4 and 3 Error',
+    explanation: `
+    First, we invoked myFunc() without passing any arguments. Since we didn't pass arguments, num and value got their default values: num is 2, and value the returned value of the function add. To the add function, we pass num as an argument, which had the value of 2. add returns 4, which is the value of value.
+
+    Then, we invoked myFunc(3) and passed the value 3 as the value for the argument num. We didn't pass an argument for value. Since we didn't pass a value for the value argument, it got the default value: the returned value of the add function. To add, we pass num, which has the value of 3. add returns 6, which is the value of value.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output?',
+    questionText: `
+    class Counter {
+      #number = 10
+    
+      increment() {
+        this.#number++
+      }
+    
+      getNum() {
+        return this.#number
+      }
+    }
+    
+    const counter = new Counter()
+    counter.increment()
+    
+    console.log(counter.#number)
+    `,
+    answer: 'd',
+    a: '10',
+    b: '11',
+    c: 'undefined',
+    d: 'SyntaxError',
+    explanation: `
+    In ES2020, we can add private variables in classes by using the #. We cannot access these variables outside of the class. When we try to log counter.#number, a SyntaxError gets thrown: we cannot acccess it outside the Counter class!
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is missing?',
+    questionText: `
+    const teams = [
+      { name: 'Team 1', members: ['Paul', 'Lisa'] },
+      { name: 'Team 2', members: ['Laura', 'Tim'] },
+    ];
+    
+    function* getMembers(members) {
+      for (let i = 0; i < members.length; i++) {
+        yield members[i];
+      }
+    }
+    
+    function* getTeams(teams) {
+      for (let i = 0; i < teams.length; i++) {
+        // ✨ SOMETHING IS MISSING HERE ✨
+      }
+    }
+    
+    const obj = getTeams(teams);
+    obj.next(); // { value: "Paul", done: false }
+    obj.next(); // { value: "Lisa", done: false }
+    `,
+    answer: 'b',
+    a: 'yield getMembers(teams[i].members)',
+    b: 'yield* getMembers(teams[i].members)',
+    c: 'return getMembers(teams[i].members)',
+    d: 'return yield getMembers(teams[i].members)',
+    explanation: `
+    In order to iterate over the members in each element in the teams array, we need to pass teams[i].members to the getMembers generator function. The generator function returns a generator object. In order to iterate over each element in this generator object, we need to use yield*.
+
+    If we would've written yield, return yield, or return, the entire generator function would've gotten returned the first time we called the next method.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output?',
+    questionText: `
+    const person = {
+      name: 'Lydia Hallie',
+      hobbies: ['coding'],
+    };
+    
+    function addHobby(hobby, hobbies = person.hobbies) {
+      hobbies.push(hobby);
+      return hobbies;
+    }
+    
+    addHobby('running', []);
+    addHobby('dancing');
+    addHobby('baking', person.hobbies);
+    
+    console.log(person.hobbies);
+    `,
+    answer: 'c',
+    a: '["coding"]',
+    b: '["coding", "dancing"]',
+    c: '["coding", "dancing", "baking"]',
+    d: '["coding", "running", "dancing", "baking"]',
+    explanation: `
+    The addHobby function receives two arguments, hobby and hobbies with the default value of the hobbies array on the person object.
+
+    First, we invoke the addHobby function, and pass "running" as the value for hobby and an empty array as the value for hobbies. Since we pass an empty array as the value for y, "running" gets added to this empty array.
+
+    Then, we invoke the addHobby function, and pass "dancing" as the value for hobby. We didn't pass a value for hobbies, so it gets the default value, the hobbies property on the person object. We push the hobby dancing to the person.hobbies array.
+
+    Last, we invoke the addHobby function, and pass "baking" as the value for hobby, and the person.hobbies array as the value for hobbies. We push the hobby baking to the person.hobbies array.
+
+    After pushing dancing and baking, the value of person.hobbies is ["coding", "dancing", "baking"]
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output?',
+    questionText: `
+    class Bird {
+      constructor() {
+        console.log("I'm a bird. 🦢");
+      }
+    }
+    
+    class Flamingo extends Bird {
+      constructor() {
+        console.log("I'm pink. 🌸");
+        super();
+      }
+    }
+    
+    const pet = new Flamingo();
+    `,
+    answer: 'b',
+    a: 'I\'m pink. 🌸',
+    b: 'I\'m pink. 🌸 I\'m a bird. 🦢',
+    c: 'I\'m a bird. 🦢 I\'m pink. 🌸',
+    d: 'Nothing, we didn\'t call any method',
+    explanation: `
+    We create the variable pet which is an instance of the Flamingo class. When we instantiate this instance, the constructor on Flamingo gets called. First, "I'm pink. 🌸" gets logged, after which we call super(). super() calls the constructor of the parent class, Bird. The constructor in Bird gets called, and logs "I'm a bird. 🦢".
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'Which of the options result(s) in an error?',
+    questionText: `
+    const emojis = ['🎄', '🎅🏼', '🎁', '⭐'];
+
+    /* 1 */ emojis.push('🦌');
+    /* 2 */ emojis.splice(0, 2);
+    /* 3 */ emojis = [...emojis, '🥂'];
+    /* 4 */ emojis.length = 0;
+    `,
+    answer: 'd',
+    a: '1',
+    b: '1 and 2',
+    c: '3 and 4',
+    d: '3',
+    explanation: `
+    The const keyword simply means we cannot redeclare the value of that variable, it's read-only. However, the value itself isn't immutable. The properties on the emojis array can be modified, for example by pushing new values, splicing them, or setting the length of the array to 0.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What do we need to add to the person object to get ["Lydia Hallie", 21] as the output of [...person]?',
+    questionText: `
+    const person = {
+      name: "Lydia Hallie",
+      age: 21
+    }
+    
+    [...person] // ["Lydia Hallie", 21]
+    `,
+    answer: 'c',
+    a: 'Nothing, object are iterable by default',
+    b: '*[Symbol.iterator]() { for (let x in this) yield* this[x] }',
+    c: '*[Symbol.iterator]() { yield* Object.values(this) }',
+    d: '*[Symbol.iterator]() { for (let x in this) yield this }',
+    explanation: `
+    Objects aren't iterable by default. An iterable is an iterable if the iterator protocol is present. We can add this manually by adding the iterator symbol [Symbol.iterator], which has to return a generator object, for example by making it a generator function *[Symbol.iterator]() {}. This generator function has to yield the Object.values of the person object if we want it to return the array ["Lydia Hallie", 21]: yield* Object.values(this).
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output?',
+    questionText: `
+    let count = 0;
+    const nums = [0, 1, 2, 3];
+
+    nums.forEach(num => {
+      if (num) count += 1
+    })
+
+    console.log(count)
+    `,
+    answer: 'c',
+    a: '1',
+    b: '2',
+    c: '3',
+    d: '4',
+    explanation: `
+    The if condition within the forEach loop checks whether the value of num is truthy or falsy. Since the first number in the nums array is 0, a falsy value, the if statement's code block won't be executed. count only gets incremented for the other 3 numbers in the nums array, 1, 2 and 3. Since count gets incremented by 1 3 times, the value of count is 3.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output?',
+    questionText: `
+    function getFruit(fruits) {
+      console.log(fruits?.[1]?.[1])
+    }
+    
+    getFruit([['🍊', '🍌'], ['🍍']])
+    getFruit()
+    getFruit([['🍍'], ['🍊', '🍌']])
+    `,
+    answer: 'd',
+    a: 'null, undefined, 🍌',
+    b: '[], null, 🍌',
+    c: '[], [], 🍌',
+    d: 'undefined, undefined, 🍌',
+    explanation: `
+    The ? allows us to optionally access deeper nested properties within objects. We're trying to log the item on index 1 within the subarray that's on index 1 of the fruits array. If the subarray on index 1 in the fruits array doesn't exist, it'll simply return undefined. If the subarray on index 1 in the fruits array exists, but this subarray doesn't have an item on its 1 index, it'll also return undefined.
+
+    First, we're trying to log the second item in the ['🍍'] subarray of [['🍊', '🍌'], ['🍍']]. This subarray only contains one item, which means there is no item on index 1, and returns undefined.
+
+    Then, we're invoking the getFruits function without passing a value as an argument, which means that fruits has a value of undefined by default. Since we're conditionally chaining the item on index 1 offruits, it returns undefined since this item on index 1 does not exist.
+
+    Lastly, we're trying to log the second item in the ['🍊', '🍌'] subarray of ['🍍'], ['🍊', '🍌']. The item on index 1 within this subarray is 🍌, which gets logged.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output?',
+    questionText: `
+    class Calc {
+      constructor() {
+        this.count = 0 
+      }
+    
+      increase() {
+        this.count ++
+      }
+    }
+    
+    const calc = new Calc()
+    new Calc().increase()
+    
+    console.log(calc.count)
+    `,
+    answer: 'a',
+    a: '0',
+    b: '1',
+    c: 'undefined',
+    d: 'ReferenceError',
+    explanation: `
+    We set the variable calc equal to a new instance of the Calc class. Then, we instantiate a new instance of Calc, and invoke the increase method on this instance. Since the count property is within the constructor of the Calc class, the count property is not shared on the prototype of Calc. This means that the value of count has not been updated for the instance calc points to, count is still 0.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output?',
+    questionText: `
+    const user = {
+      email: "e@mail.com",
+      password: "12345"
+    }
+    
+    const updateUser = ({ email, password }) => {
+      if (email) {
+        Object.assign(user, { email })
+      }
+    
+      if (password) {
+        user.password = password
+      }
+    
+      return user
+    }
+    
+    const updatedUser = updateUser({ email: "new@email.com" })
+    
+    console.log(updatedUser === user)
+    `,
+    answer: 'b',
+    a: 'false',
+    b: 'true',
+    c: 'TypeError',
+    d: 'ReferenceError',
+    explanation: `
+    The updateUser function updates the values of the email and password properties on user, if their values are passed to the function, after which the function returns the user object. The returned value of the updateUser function is the user object, which means that the value of updatedUser is a reference to the same user object that user points to. updatedUser === user equals true.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output?',
+    questionText: `
+    const fruit = ['🍌', '🍊', '🍎']
+
+    fruit.slice(0, 1)
+    fruit.splice(0, 1)
+    fruit.unshift('🍇')
+
+    console.log(fruit)
+    `,
+    answer: 'c',
+    a: '[\'🍌\', \'🍊\', \'🍎\']',
+    b: '[\'🍊\', \'🍎\']',
+    c: '[\'🍇\', \'🍊\', \'🍎\']',
+    d: '[\'🍇\', \'🍌\', \'🍊\', \'🍎\']',
+    explanation: `
+    First, we invoke the slice method on the fruit array. The slice method does not modify the original array, but returns the value that it sliced off the array: the banana emoji. Then, we invoke the splice method on the fruit array. The splice method does modify the original array, which means that the fruit array now consists of ['🍊', '🍎']. At last, we invoke the unshift method on the fruit array, which modifies the original array by adding the provided value, ‘🍇’ in this case, as the first element in the array. The fruit array now consists of ['🍇', '🍊', '🍎'].
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output?',
+    questionText: `
+    const animals = {};
+    let dog = { emoji: '🐶' }
+    let cat = { emoji: '🐈' }
+
+    animals[dog] = { ...dog, name: "Mara" }
+    animals[cat] = { ...cat, name: "Sara" }
+
+    console.log(animals[dog])
+    `,
+    answer: 'b',
+    a: '{ emoji: "🐶", name: "Mara" }',
+    b: '{ emoji: "🐈", name: "Sara" }',
+    c: 'undefined',
+    d: 'ReferenceError',
+    explanation: `
+    Object keys are converted to strings.
+
+    Since the value of dog is an object, animals[dog] actually means that we’re creating a new property called "object Object" equal to the new object. animals["object Object"] is now equal to { emoji: "🐶", name: "Mara"}.
+
+    cat is also an object, which means that animals[cat] actually means that we’re overwriting the value of animals[``"``object Object``"``] with the new cat properties.
+
+    Logging animals[dog], or actually animals["object Object"] since converting the dog object to a string results "object Object", returns the { emoji: "🐈", name: "Sara" }.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output?',
+    questionText: `
+    const user = {
+      email: "my@email.com",
+      updateEmail: email => {
+        this.email = email
+      }
+    }
+    
+    user.updateEmail("new@email.com")
+    console.log(user.email)
+    `,
+    answer: 'a',
+    a: 'my@email.com',
+    b: 'new@email.com',
+    c: 'undefined',
+    d: 'ReferenceError',
+    explanation: `
+    The updateEmail function is an arrow function, and is not bound to the user object. This means that the this keyword is not referring to the user object, but refers to the global scope in this case. The value of email within the user object does not get updated. When logging the value of user.email, the original value of my@email.com gets returned.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output?',
+    questionText: `
+    const promise1 = Promise.resolve('First')
+    const promise2 = Promise.resolve('Second')
+    const promise3 = Promise.reject('Third')
+    const promise4 = Promise.resolve('Fourth')
+
+    const runPromises = async () => {
+      const res1 = await Promise.all([promise1, promise2])
+      const res2  = await Promise.all([promise3, promise4])
+      return [res1, res2]
+    }
+
+    runPromises()
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
+    `,
+    answer: 'd',
+    a: '[[\'First\', \'Second\'], [\'Fourth\']]',
+    b: '[[\'First\', \'Second\'], [\'Third\', \'Fourth\']]',
+    c: '[[\'First\', \'Second\']]',
+    d: '\'Third\'',
+    explanation: `
+    The Promise.all method runs the passed promises in parallel. If one promise fails, the Promise.all method rejects with the value of the rejected promise. In this case, promise3 rejected with the value "Third". We’re catching the rejected value in the chained catch method on the runPromises invocation to catch any errors within the runPromises function. Only "Third" gets logged, since promise3 rejected with this value.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What should the value of method be to log { name: "Lydia", age: 22 }?',
+    questionText: `
+    const keys = ["name", "age"]
+    const values = ["Lydia", 22]
+
+    const method = /* ?? */
+    Object[method](keys.map((_, i) => {
+      return [keys[i], values[i]]
+    })) // { name: "Lydia", age: 22 }
+    `,
+    answer: 'c',
+    a: 'entries',
+    b: 'values',
+    c: 'fromEntries',
+    d: 'forEach',
+    explanation: `
+    The fromEntries method turns a 2d array into an object. The first element in each subarray will be the key, and the second element in each subarray will be the value. In this case, we’re mapping over the keys array, which returns an array which first element is the item on the key array on the current index, and the second element is the item of the values array on the current index.
+
+    This creates an array of subarrays containing the correct keys and values, which results in { name: "Lydia", age: 22 }
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output?',
+    questionText: `
+    const createMember = ({ email, address = {}}) => {
+      const validEmail = /.+\@.+\..+/.test(email)
+      if (!validEmail) throw new Error("Valid email pls")
+    
+      return {
+        email,
+        address: address ? address : null
+      }
+    }
+    
+    const member = createMember({ email: "my@email.com" })
+    console.log(member)
+    `,
+    answer: 'c',
+    a: '{ email: "my@email.com", address: null }',
+    b: '{ email: "my@email.com" }',
+    c: '{ email: "my@email.com", address: {} }',
+    d: '{ email: "my@email.com", address: undefined }',
+    explanation: `
+    The default value of address is an empty object {}. When we set the variable member equal to the object returned by the createMember function, we didn't pass a value for address, which means that the value of address is the default empty object {}. An empty object is a truthy value, which means that the condition of the address ? address : null conditional returns true. The value of address is the empty object {}.
+    `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What is the output?',
+    questionText: `
+    let randomValue = { name: "Lydia" }
+    randomValue = 23
+
+    if (!typeof randomValue === "string") {
+      console.log("It's not a string!")
+    } else {
+      console.log("Yay it's a string!")
+    }
+    `,
+    answer: 'b',
+    a: 'It\'s not a string!',
+    b: 'Yay it\'s a string!',
+    c: 'TypeError',
+    d: 'undefined',
+    explanation: `
+    The condition within the if statement checks whether the value of !typeof randomValue is equal to "string". The ! operator converts the value to a boolean value. If the value is truthy, the returned value will be false, if the value is falsy, the returned value will be true. In this case, the returned value of typeof randomValue is the truthy value "number", meaning that the value of !typeof randomValue is the boolean value false.
+
+    !typeof randomValue === "string" always returns false, since we're actually checking false === "string". Since the condition returned false, the code block of the else statement gets run, and Yay it's a string! gets logged.
+    `,
     language: 'JavaScript'
   },
 ];

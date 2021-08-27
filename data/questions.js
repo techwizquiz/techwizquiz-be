@@ -815,5 +815,114 @@ export default [
   `,
     language: 'JavaScript'
   },
+  {
+    level: 1,
+    questionTitle: 'What\'s the output?',
+    questionText: `
+    console.log(typeof typeof 1);
+    `,
+    answer: 'b',
+    a: '"number"',
+    b: '"string"',
+    c: '"object"',
+    d: '"undefined"',
+    explanation: `
+    typeof 1 returns "number". typeof "number" returns "string"
+  `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What\'s the output?',
+    questionText: `
+    const numbers = [1, 2, 3];
+    numbers[10] = 11;
+    console.log(numbers);
+    `,
+    answer: 'c',
+    a: '[1, 2, 3, 7 x null, 11]',
+    b: '[1, 2, 3, 11]',
+    c: '[1, 2, 3, 7 x empty, 11]',
+    d: 'SyntaxError',
+    explanation: `
+    When you set a value to an element in an array that exceeds the length of the array, JavaScript creates something called "empty slots". These actually have the value of undefined, but you will see something like:
+
+    [1, 2, 3, 7 x empty, 11]
+
+    depending on where you run it (it's different for every browser, node, etc.)
+  `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What\'s the output?',
+    questionText: `
+    (() => {
+      let x, y;
+      try {
+        throw new Error();
+      } catch (x) {
+        (x = 1), (y = 2);
+        console.log(x);
+      }
+      console.log(x);
+      console.log(y);
+    })();
+    `,
+    answer: 'a',
+    a: '1 undefined 2',
+    b: 'undefined undefined undefined',
+    c: '1 1 2',
+    d: '1 undefined undefined',
+    explanation: `
+    The catch block receives the argument x. This is not the same x as the variable when we pass arguments. This variable x is block-scoped.
+
+    Later, we set this block-scoped variable equal to 1, and set the value of the variable y. Now, we log the block-scoped variable x, which is equal to 1.
+
+    Outside of the catch block, x is still undefined, and y is 2. When we want to console.log(x) outside of the catch block, it returns undefined, and y returns 2.
+  `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'Select the best answer.',
+    questionText: 'Everything in JavaScript is either a...',
+    answer: 'a',
+    a: 'primitive or object',
+    b: 'function or object',
+    c: 'trick question! only objects',
+    d: 'number or object',
+    explanation: `
+    JavaScript only has primitive types and objects.
+
+  Primitive types are boolean, null, undefined, bigint, number, string, and symbol.
+  
+  What differentiates a primitive from an object is that primitives do not have any   properties or methods; however, you'll note that 'foo'.toUpperCase() evaluates to 'FOO' and does not result in a TypeError. This is because when you try to access a property or method on a primitive like a string, JavaScript will implicitly wrap the primitive type using one of the wrapper classes, i.e. String, and then immediately discard the wrapper after the expression evaluates. All primitives except for null and undefined exhibit this behaviour.
+  `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What\'s the output?',
+    questionText: `
+    [[0, 1], [2, 3]].reduce(
+      (acc, cur) => {
+        return acc.concat(cur);
+      },
+      [1, 2],
+    );
+    `,
+    answer: 'c',
+    a: '[0, 1, 2, 3, 1, 2]',
+    b: '[6, 1, 2]',
+    c: '[1, 2, 0, 1, 2, 3]',
+    d: '[1, 2, 6]',
+    explanation: `
+    [1, 2] is our initial value. This is the value we start with, and the value of the very first acc. During the first round, acc is [1,2], and cur is [0, 1]. We concatenate them, which results in [1, 2, 0, 1].
+    
+    Then, [1, 2, 0, 1] is acc and [2, 3] is cur. We concatenate them, and get [1, 2, 0, 1, 2, 3]
+  `,
+    language: 'JavaScript'
+  },
 ];
 

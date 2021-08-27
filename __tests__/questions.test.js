@@ -60,6 +60,14 @@ describe('questions routes', () => {
       ...perlQ
     }]);
   });
+
+  it('gets a question by id', async () => {
+    const perl = await Question.insert(perlQ);
+
+    const res = await request(app)
+      .get(`/api/v1/questions/${perl.id}`);
+    expect(res.body).toEqual(perl);
+  });
 });
 
 

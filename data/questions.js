@@ -485,11 +485,91 @@ export default [
     `,
     answer: 'a',
     a: '105',
-    b: '"105',
+    b: '"105"',
     c: 'TypeError',
     d: '"10*10+5',
     explanation: `
     eval evaluates codes that's passed as a string. If it's an expression, like in this case, it evaluates the expression. The expression is 10 * 10 + 5. This returns the number 105.
+  `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'How long is cool_secret accessible?',
+    questionText: `
+    sessionStorage.setItem('cool_secret', 123);
+    `,
+    answer: 'b',
+    a: 'Forever, the data doesn\'t get lost',
+    b: 'When the user closes the tab',
+    c: 'When the user closes the entire browser, not only the tab',
+    d: 'When the user shuts off their computer',
+    explanation: `
+    The data stored in sessionStorage is removed after closing the tab.
+
+    If you used localStorage, the data would've been there forever, unless for example localStorage.clear() is invoked.
+  `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What\'s the output?',
+    questionText: `
+    var num = 8;
+    var num = 10;
+
+    console.log(num);
+    `,
+    answer: 'b',
+    a: '8',
+    b: '10',
+    c: 'SyntaxError',
+    d: 'ReferenceError',
+    explanation: `
+    With the var keyword, you can declare multiple variables with the same name. The variable will then hold the latest value.
+
+    You cannot do this with let or const since they're block-scoped.
+  `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What\'s the output?',
+    questionText: `
+    const obj = { 1: 'a', 2: 'b', 3: 'c' };
+    const set = new Set([1, 2, 3, 4, 5]);
+
+    obj.hasOwnProperty('1');
+    obj.hasOwnProperty(1);
+    set.has('1');
+    set.has(1);
+    `,
+    answer: 'c',
+    a: 'false true false true',
+    b: 'false true true true',
+    c: 'true true false true',
+    d: 'true true true true',
+    explanation: `
+    All object keys (excluding Symbols) are strings under the hood, even if you don't type it yourself as a string. This is why obj.hasOwnProperty('1') also returns true.
+
+    It doesn't work that way for a set. There is no '1' in our set: set.has('1') returns false. It has the numeric type 1, set.has(1) returns true.
+  `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What\'s the output?',
+    questionText: `
+    const obj = { a: 'one', b: 'two', a: 'three' };
+    console.log(obj);
+    `,
+    answer: 'c',
+    a: '{ a: "one", b: "two" }',
+    b: '{ b: "two", a: "three" }',
+    c: '{ a: "three", b: "two" }',
+    d: 'SyntaxError',
+    explanation: `
+    If you have two keys with the same name, the key will be replaced. It will still be in its first position, but with the last specified value.
   `,
     language: 'JavaScript'
   },

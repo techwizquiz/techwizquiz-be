@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS questions CASCADE;
+DROP TABLE IF EXISTS responses CASCADE;
 
 CREATE TABLE users (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -19,4 +20,11 @@ CREATE TABLE questions (
   d TEXT NOT NULL,
   explanation TEXT,
   language TEXT NOT NULL
+);
+
+CREATE TABLE responses (
+  response_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  user_id BIGINT NOT NULL REFERENCES users(id),
+  question_id BIGINT NOT NULL REFERENCES questions(question_id),
+  correct BOOLEAN NOT NULL
 );

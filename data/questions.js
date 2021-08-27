@@ -1285,5 +1285,120 @@ export default [
   `,
     language: 'JavaScript'
   },
+  {
+    level: 1,
+    questionTitle: 'What\'s the output?',
+    questionText: `
+    const set = new Set([1, 1, 2, 3, 4]);
+
+    console.log(set);
+    `,
+    answer: 'd',
+    a: '[1, 1, 2, 3, 4]',
+    b: '[1, 2, 3, 4]',
+    c: '{1, 1, 2, 3, 4}',
+    d: '{1, 2, 3, 4}',
+    explanation: `
+    The Set object is a collection of unique values: a value can only occur once in a set.
+
+    We passed the iterable [1, 1, 2, 3, 4] with a duplicate value 1. Since we cannot have two of the same values in a set, one of them is removed. This results in {1, 2, 3, 4}.
+  `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What\'s the output?',
+    questionText: `
+    // counter.js
+    let counter = 10;
+    export default counter;
+
+    // index.js
+    import myCounter from './counter';
+
+    myCounter += 1;
+
+    console.log(myCounter);
+    `,
+    answer: 'c',
+    a: '10',
+    b: '11',
+    c: 'Error',
+    d: 'NaN',
+    explanation: `
+    An imported module is read-only: you cannot modify the imported module. Only the module that exports them can change its value.
+
+    When we try to increment the value of myCounter, it throws an error: myCounter is read-only and cannot be modified.
+  `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What\'s the output?',
+    questionText: `
+    const name = 'Lydia';
+    age = 21;
+
+    console.log(delete name);
+    console.log(delete age);
+    `,
+    answer: 'a',
+    a: 'false, true',
+    b: '"Lydia", 21',
+    c: 'true, true',
+    d: 'undefined, undefined',
+    explanation: `
+    The delete operator returns a boolean value: true on a successful deletion, else it'll return false. However, variables declared with the var, const or let keyword cannot be deleted using the delete operator.
+
+    The name variable was declared with a const keyword, so its deletion is not successful: false is returned. When we set age equal to 21, we actually added a property called age to the global object. You can successfully delete properties from objects this way, also the global object, so delete age returns true.
+  `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What\'s the output?',
+    questionText: `
+    const numbers = [1, 2, 3, 4, 5];
+    const [y] = numbers;
+
+    console.log(y);
+    `,
+    answer: 'c',
+    a: '[[1, 2, 3, 4, 5]]',
+    b: '[1, 2, 3, 4, 5]',
+    c: '1',
+    d: '[1]',
+    explanation: `
+    We can unpack values from arrays or properties from objects through destructuring. For example:
+
+    [a, b] = [1, 2];
+
+    The value of a is now 1, and the value of b is now 2. What we actually did in the question, is:
+
+    [y] = [1, 2, 3, 4, 5];
+
+    This means that the value of y is equal to the first value in the array, which is the number 1. When we log y, 1 is returned.
+  `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What\'s the output?',
+    questionText: `
+    const user = { name: 'Lydia', age: 21 };
+    const admin = { admin: true, ...user };
+
+    console.log(admin);
+    `,
+    answer: 'b',
+    a: '{ admin: true, user: { name: "Lydia", age: 21 } }',
+    b: '{ admin: true, name: "Lydia", age: 21 }',
+    c: '{ admin: true, user: ["Lydia", 21] }',
+    d: '{ admin: true }',
+    explanation: `
+    It's possible to combine objects using the spread operator .... It lets you create copies of the key/value pairs of one object, and add them to another object. In this case, we create copies of the user object, and add them to the admin object. The admin object now contains the copied key/value pairs, which results in { admin: true, name: "Lydia", age: 21 }.
+  `,
+    language: 'JavaScript'
+  },
 ];
 

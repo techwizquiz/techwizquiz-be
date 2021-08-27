@@ -1,4 +1,4 @@
-export default [
+export const questions = [
   {
     level: 1,
     questionTitle: 'What\'s the output?',

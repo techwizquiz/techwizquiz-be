@@ -23,7 +23,7 @@ export const questions = [
     language: 'JavaScript'
   },
   {
-    level: 1,
+    level: 2,
     questionTitle: 'What\'s the output?',
     questionText: `
     for (var i = 0; i < 3; i++) {
@@ -47,7 +47,7 @@ export const questions = [
     language: 'JavaScript'
   },
   {
-    level: 1,
+    level: 2,
     questionTitle: 'What\'s the output?',
     questionText: `
     const shape = {
@@ -175,7 +175,7 @@ export const questions = [
     language: 'JavaScript'
   },
   {
-    level: 1,
+    level: 2,
     questionTitle: 'What\'s the output?',
     questionText: `
     class Chameleon {
@@ -245,7 +245,7 @@ export const questions = [
     language: 'JavaScript'
   },
   {
-    level: 1,
+    level: 2,
     questionTitle: 'What\'s the output??',
     questionText: `
     function Person(firstName, lastName) {
@@ -277,7 +277,7 @@ export const questions = [
     language: 'JavaScript'
   },
   {
-    level: 1,
+    level: 2,
     questionTitle: 'What\'s the output?',
     questionText: `
     function Person(firstName, lastName) {
@@ -304,7 +304,7 @@ export const questions = [
     language: 'JavaScript'
   },
   {
-    level: 1,
+    level: 3,
     questionTitle: 'Select the best answer.',
     questionText: 'What are the three phases of event propagation?',
     answer: 'd',
@@ -318,7 +318,7 @@ export const questions = [
     language: 'JavaScript'
   },
   {
-    level: 1,
+    level: 2,
     questionTitle: 'Select the best answer.',
     questionText: 'All objects have prototypes.',
     answer: 'b',
@@ -332,7 +332,7 @@ export const questions = [
     language: 'JavaScript'
   },
   {
-    level: 1,
+    level: 2,
     questionTitle: 'What\'s the output?',
     questionText: `
     function sum(a, b) {
@@ -354,7 +354,7 @@ export const questions = [
     language: 'JavaScript'
   },
   {
-    level: 1,
+    level: 2,
     questionTitle: 'What\'s the output?',
     questionText: `
     let number = 0;
@@ -381,7 +381,7 @@ export const questions = [
     language: 'JavaScript'
   },
   {
-    level: 1,
+    level: 3,
     questionTitle: 'What\'s the output?',
     questionText: `
     function getPersonInfo(one, two, three) {
@@ -406,7 +406,7 @@ export const questions = [
     language: 'JavaScript'
   },
   {
-    level: 1,
+    level: 2,
     questionTitle: 'What\'s the output?',
     questionText: `
     function checkAge(data) {
@@ -436,7 +436,7 @@ export const questions = [
     language: 'JavaScript'
   },
   {
-    level: 1,
+    level: 3,
     questionTitle: 'What\'s the output?',
     questionText: `
     function getAge(...args) {
@@ -456,7 +456,7 @@ export const questions = [
     language: 'JavaScript'
   },
   {
-    level: 1,
+    level: 2,
     questionTitle: 'What\'s the output?',
     questionText: `
     function getAge() {
@@ -533,7 +533,7 @@ export const questions = [
     language: 'JavaScript'
   },
   {
-    level: 1,
+    level: 3,
     questionTitle: 'What\'s the output?',
     questionText: `
     const obj = { 1: 'a', 2: 'b', 3: 'c' };
@@ -557,7 +557,7 @@ export const questions = [
     language: 'JavaScript'
   },
   {
-    level: 1,
+    level: 2,
     questionTitle: 'What\'s the output?',
     questionText: `
     const obj = { a: 'one', b: 'two', a: 'three' };
@@ -574,7 +574,7 @@ export const questions = [
     language: 'JavaScript'
   },
   {
-    level: 1,
+    level: 2,
     questionTitle: 'Select the best answer.',
     questionText: `
     The JavaScript global execution context creates two things for you: the global object, and the "this" keyword.
@@ -590,7 +590,7 @@ export const questions = [
     language: 'JavaScript'
   },
   {
-    level: 1,
+    level: 2,
     questionTitle: 'What\'s the output?',
     questionText: `
     for (let i = 1; i < 5; i++) {
@@ -631,7 +631,7 @@ export const questions = [
     language: 'JavaScript'
   },
   {
-    level: 1,
+    level: 3,
     questionTitle: 'What\'s the output?',
     questionText: `
     const a = {};
@@ -717,7 +717,7 @@ export const questions = [
     language: 'JavaScript'
   },
   {
-    level: 1,
+    level: 2,
     questionTitle: 'When you click the paragraph, what\'s the logged output?',
     questionText: `
     <div onclick="console.log('div')">
@@ -737,7 +737,7 @@ export const questions = [
     language: 'JavaScript'
   },
   {
-    level: 1,
+    level: 3,
     questionTitle: 'What\'s the output?',
     questionText: `
     const person = { name: 'Lydia' };
@@ -784,7 +784,7 @@ export const questions = [
     language: 'JavaScript'
   },
   {
-    level: 1,
+    level: 3,
     questionTitle: 'Which of these values are falsy?',
     questionText: `
     0;
@@ -816,7 +816,7 @@ export const questions = [
     language: 'JavaScript'
   },
   {
-    level: 1,
+    level: 2,
     questionTitle: 'What\'s the output?',
     questionText: `
     console.log(typeof typeof 1);
@@ -832,7 +832,7 @@ export const questions = [
     language: 'JavaScript'
   },
   {
-    level: 1,
+    level: 2,
     questionTitle: 'What\'s the output?',
     questionText: `
     const numbers = [1, 2, 3];
@@ -854,7 +854,7 @@ export const questions = [
     language: 'JavaScript'
   },
   {
-    level: 1,
+    level: 3,
     questionTitle: 'What\'s the output?',
     questionText: `
     (() => {
@@ -902,7 +902,7 @@ export const questions = [
     language: 'JavaScript'
   },
   {
-    level: 1,
+    level: 3,
     questionTitle: 'What\'s the output?',
     questionText: `
     [[0, 1], [2, 3]].reduce(
@@ -925,7 +925,7 @@ export const questions = [
     language: 'JavaScript'
   },
   {
-    level: 1,
+    level: 3,
     questionTitle: 'What\'s the output?',
     questionText: `
     !!null;
@@ -947,7 +947,7 @@ export const questions = [
     language: 'JavaScript'
   },
   {
-    level: 1,
+    level: 2,
     questionTitle: 'What does the setInterval method return in the browser?',
     questionText: `
     setInterval(() => console.log('Hi'), 1000);
@@ -963,7 +963,7 @@ export const questions = [
     language: 'JavaScript'
   },
   {
-    level: 1,
+    level: 2,
     questionTitle: 'What does this return?',
     questionText: `
     [...'Lydia'];
@@ -979,7 +979,7 @@ export const questions = [
     language: 'JavaScript'
   },
   {
-    level: 1,
+    level: 3,
     questionTitle: 'What\'s the output?',
     questionText: `
     function* generator(i) {
@@ -1007,7 +1007,7 @@ export const questions = [
     language: 'JavaScript'
   },
   {
-    level: 1,
+    level: 3,
     questionTitle: 'What does this return?',
     questionText: `
     const firstPromise = new Promise((res, rej) => {
@@ -1031,7 +1031,7 @@ export const questions = [
     language: 'JavaScript'
   },
   {
-    level: 1,
+    level: 2,
     questionTitle: 'What\'s the output?',
     questionText: `
     let person = { name: 'Lydia' };
@@ -1100,7 +1100,7 @@ export const questions = [
     language: 'JavaScript'
   },
   {
-    level: 1,
+    level: 3,
     questionTitle: 'What\'s the value of num?',
     questionText: `
     const num = parseInt('7*6', 10);
@@ -1118,7 +1118,7 @@ export const questions = [
     language: 'JavaScript'
   },
   {
-    level: 1,
+    level: 3,
     questionTitle: 'What\'s the output?',
     questionText: `
     [1, 2, 3].map(num => {
@@ -1139,7 +1139,7 @@ export const questions = [
     language: 'JavaScript'
   },
   {
-    level: 1,
+    level: 3,
     questionTitle: 'What\'s the output?',
     questionText: `
     function getInfo(member, year) {
@@ -1169,7 +1169,7 @@ export const questions = [
     language: 'JavaScript'
   },
   {
-    level: 1,
+    level: 2,
     questionTitle: 'What\'s the output?',
     questionText: `
     function greeting() {
@@ -1200,7 +1200,7 @@ export const questions = [
     language: 'JavaScript'
   },
   {
-    level: 1,
+    level: 2,
     questionTitle: 'What\'s the output?',
     questionText: `
     function Car() {
@@ -1222,7 +1222,7 @@ export const questions = [
     language: 'JavaScript'
   },
   {
-    level: 1,
+    level: 3,
     questionTitle: 'What\'s the output?',
     questionText: `
     (() => {
@@ -1252,7 +1252,7 @@ export const questions = [
     language: 'JavaScript'
   },
   {
-    level: 1,
+    level: 3,
     questionTitle: 'What\'s the output?',
     questionText: `
     class Dog {
@@ -1286,7 +1286,7 @@ export const questions = [
     language: 'JavaScript'
   },
   {
-    level: 1,
+    level: 2,
     questionTitle: 'What\'s the output?',
     questionText: `
     const set = new Set([1, 1, 2, 3, 4]);
@@ -1306,7 +1306,7 @@ export const questions = [
     language: 'JavaScript'
   },
   {
-    level: 1,
+    level: 3,
     questionTitle: 'What\'s the output?',
     questionText: `
     // counter.js
@@ -1333,7 +1333,7 @@ export const questions = [
     language: 'JavaScript'
   },
   {
-    level: 1,
+    level: 2,
     questionTitle: 'What\'s the output?',
     questionText: `
     const name = 'Lydia';
@@ -1382,7 +1382,7 @@ export const questions = [
     language: 'JavaScript'
   },
   {
-    level: 1,
+    level: 3,
     questionTitle: 'What\'s the output?',
     questionText: `
     const user = { name: 'Lydia', age: 21 };
@@ -1401,7 +1401,7 @@ export const questions = [
     language: 'JavaScript'
   },
   {
-    level: 1,
+    level: 3,
     questionTitle: 'What\'s the output?',
     questionText: `
     const person = { name: 'Lydia' };
@@ -1424,7 +1424,7 @@ export const questions = [
     language: 'JavaScript'
   },
   {
-    level: 1,
+    level: 3,
     questionTitle: 'What\'s the output?',
     questionText: `
     const settings = {
@@ -1451,7 +1451,7 @@ export const questions = [
     language: 'JavaScript'
   },
   {
-    level: 1,
+    level: 2,
     questionTitle: 'What\'s the output?',
     questionText: `
     let num = 10;
@@ -1478,7 +1478,7 @@ export const questions = [
     language: 'JavaScript'
   },
   {
-    level: 1,
+    level: 3,
     questionTitle: 'What\'s the output?',
     questionText: `
     const value = { number: 10 };
@@ -1509,7 +1509,7 @@ export const questions = [
     language: 'JavaScript'
   },
   {
-    level: 1,
+    level: 3,
     questionTitle: 'What\'s the output?',
     questionText: `
     [1, 2, 3, 4].reduce((x, y) => console.log(x, y));
@@ -1535,7 +1535,7 @@ export const questions = [
     language: 'JavaScript'
   },
   {
-    level: 1,
+    level: 2,
     questionTitle: 'With which constructor can we successfully extend the Dog class?',
     questionText: `
     class Dog {
@@ -1582,7 +1582,7 @@ export const questions = [
     language: 'JavaScript'
   },
   {
-    level: 1,
+    level: 3,
     questionTitle: 'What\'s the output?',
     questionText: `
     // index.js
@@ -1625,7 +1625,7 @@ export const questions = [
     language: 'JavaScript'
   },
   {
-    level: 1,
+    level: 3,
     questionTitle: 'What\'s the output?',
     questionText: `
     const name = 'Lydia Hallie';

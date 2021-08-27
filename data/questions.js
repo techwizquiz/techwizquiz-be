@@ -1534,5 +1534,131 @@ export default [
   `,
     language: 'JavaScript'
   },
+  {
+    level: 1,
+    questionTitle: 'With which constructor can we successfully extend the Dog class?',
+    questionText: `
+    class Dog {
+      constructor(name) {
+        this.name = name;
+      }
+    };
+    
+    class Labrador extends Dog {
+      // 1
+      constructor(name, size) {
+        this.size = size;
+      }
+      // 2
+      constructor(name, size) {
+        super(name);
+        this.size = size;
+      }
+      // 3
+      constructor(size) {
+        super(name);
+        this.size = size;
+      }
+      // 4
+      constructor(name, size) {
+        this.name = name;
+        this.size = size;
+      }
+    
+    };
+    `,
+    answer: 'b',
+    a: '1',
+    b: '2',
+    c: '3',
+    d: '4',
+    explanation: `
+    In a derived class, you cannot access the this keyword before calling super. If you try to do that, it will throw a ReferenceError: 1 and 4 would throw a reference error.
+
+    With the super keyword, we call that parent class's constructor with the given arguments. The parent's constructor receives the name argument, so we need to pass name to super.
+
+    The Labrador class receives two arguments, name since it extends Dog, and size as an extra property on the Labrador class. They both need to be passed to the constructor function on Labrador, which is done correctly using constructor 2.
+  `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What\'s the output?',
+    questionText: `
+    // index.js
+    console.log('running index.js');
+    import { sum } from './sum.js';
+    console.log(sum(1, 2));
+
+    // sum.js
+    console.log('running sum.js');
+    export const sum = (a, b) => a + b;
+    `,
+    answer: 'b',
+    a: 'running index.js, running sum.js, 3',
+    b: 'running sum.js, running index.js, 3',
+    c: 'running sum.js, 3, running index.js',
+    d: 'running index.js, undefined, running sum.js',
+    explanation: `
+    With the import keyword, all imported modules are pre-parsed. This means that the imported modules get run first, the code in the file which imports the module gets executed after.
+
+    This is a difference between require() in CommonJS and import! With require(), you can load dependencies on demand while the code is being run. If we would have used require instead of import, running index.js, running sum.js, 3 would have been logged to the console.
+  `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What\'s the output?',
+    questionText: `
+    console.log(Number(2) === Number(2));
+    console.log(Boolean(false) === Boolean(false));
+    console.log(Symbol('foo') === Symbol('foo'));
+    `,
+    answer: 'a',
+    a: 'true, true, true',
+    b: 'false, true, false',
+    c: 'true, false, true',
+    d: 'true, true, true',
+    explanation: `
+    Every Symbol is entirely unique. The purpose of the argument passed to the Symbol is to give the Symbol a description. The value of the Symbol is not dependent on the passed argument. As we test equality, we are creating two entirely new symbols: the first Symbol('foo'), and the second Symbol('foo'). These two values are unique and not equal to each other, Symbol('foo') === Symbol('foo') returns false.
+  `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What\'s the output?',
+    questionText: `
+    const name = 'Lydia Hallie';
+    console.log(name.padStart(13));
+    console.log(name.padStart(2));
+    `,
+    answer: 'c',
+    a: '"Lydia Hallie", "Lydia Hallie"',
+    b: '" Lydia Hallie", " Lydia Hallie" ("[13x whitespace]Lydia Hallie", "[2x whitespace]Lydia Hallie")',
+    c: '" Lydia Hallie", "Lydia Hallie" ("[1x whitespace]Lydia Hallie", "Lydia Hallie")',
+    d: '"Lydia Hallie", "Lyd",',
+    explanation: `
+    With the padStart method, we can add padding to the beginning of a string. The value passed to this method is the total length of the string together with the padding. The string "Lydia Hallie" has a length of 12. name.padStart(13) inserts 1 space at the start of the string, because 12 + 1 is 13.
+
+    If the argument passed to the padStart method is smaller than the length of the array, no padding will be added.
+  `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What\'s the output?',
+    questionText: `
+    console.log('🥑' + '💻');
+    `,
+    answer: 'a',
+    a: '"🥑💻"',
+    b: '257548',
+    c: 'A string containing their code points',
+    d: 'Error',
+    explanation: `
+    With the + operator, you can concatenate strings. In this case, we are concatenating the string "🥑" with the string "💻", resulting in "🥑💻".
+  `,
+    language: 'JavaScript'
+  },
 ];
 

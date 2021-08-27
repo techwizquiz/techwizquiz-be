@@ -1400,5 +1400,139 @@ export default [
   `,
     language: 'JavaScript'
   },
+  {
+    level: 1,
+    questionTitle: 'What\'s the output?',
+    questionText: `
+    const person = { name: 'Lydia' };
+
+    Object.defineProperty(person, 'age', { value: 21 });
+
+    console.log(person);
+    console.log(Object.keys(person));
+    `,
+    answer: 'b',
+    a: '{ name: "Lydia", age: 21 }, ["name", "age"]',
+    b: '{ name: "Lydia", age: 21 }, ["name"]',
+    c: '{ name: "Lydia"}, ["name", "age"]',
+    d: '{ name: "Lydia"}, ["age"]',
+    explanation: `
+    With the defineProperty method, we can add new properties to an object, or modify existing ones. When we add a property to an object using the defineProperty method, they are by default not enumerable. The Object.keys method returns all enumerable property names from an object, in this case only "name".
+
+    Properties added using the defineProperty method are immutable by default. You can override this behavior using the writable, configurable and enumerable properties. This way, the defineProperty method gives you a lot more control over the properties you're adding to an object.
+  `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What\'s the output?',
+    questionText: `
+    const settings = {
+      username: 'lydiahallie',
+      level: 19,
+      health: 90,
+    };
+    
+    const data = JSON.stringify(settings, ['level', 'health']);
+    console.log(data);
+    `,
+    answer: 'a',
+    a: '"{"level":19, "health":90}"',
+    b: '"{"username": "lydiahallie"}"',
+    c: '"["level", "health"]"',
+    d: '"{"username": "lydiahallie", "level":19, "health":90}"',
+    explanation: `
+    The second argument of JSON.stringify is the replacer. The replacer can either be a function or an array, and lets you control what and how the values should be stringified.
+
+    If the replacer is an array, only the property names included in the array will be added to the JSON string. In this case, only the properties with the names "level" and "health" are included, "username" is excluded. data is now equal to "{"level":19, "health":90}".
+
+    If the replacer is a function, this function gets called on every property in the object you're stringifying. The value returned from this function will be the value of the property when it's added to the JSON string. If the value is undefined, this property is excluded from the JSON string.
+  `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What\'s the output?',
+    questionText: `
+    let num = 10;
+    
+    const increaseNumber = () => num++;
+    const increasePassedNumber = number => number++;
+    
+    const num1 = increaseNumber();
+    const num2 = increasePassedNumber(num1);
+    
+    console.log(num1);
+    console.log(num2);
+    `,
+    answer: 'a',
+    a: '10, 10',
+    b: '10, 11',
+    c: '11, 11',
+    d: '11, 12',
+    explanation: `
+    The unary operator ++ first returns the value of the operand, then increments the value of the operand. The value of num1 is 10, since the increaseNumber function first returns the value of num, which is 10, and only increments the value of num afterwards.
+
+    num2 is 10, since we passed num1 to the increasePassedNumber. number is equal to 10(the value of num1. Again, the unary operator ++ first returns the value of the operand, then increments the value of the operand. The value of number is 10, so num2 is equal to 10.
+  `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What\'s the output?',
+    questionText: `
+    const value = { number: 10 };
+
+    const multiply = (x = { ...value }) => {
+      console.log((x.number *= 2));
+    };
+
+    multiply();
+    multiply();
+    multiply(value);
+    multiply(value);
+    `,
+    answer: 'c',
+    a: '20, 40, 80, 160',
+    b: '20, 40, 20, 40',
+    c: '20, 20, 20, 40',
+    d: 'NaN, NaN, 20, 40',
+    explanation: `
+    In ES6, we can initialize parameters with a default value. The value of the parameter will be the default value, if no other value has been passed to the function, or if the value of the parameter is "undefined". In this case, we spread the properties of the value object into a new object, so x has the default value of { number: 10 }.
+    
+    The default argument is evaluated at call time! Every time we call the function, a new object is created. We invoke the multiply function the first two times without passing a value: x has the default value of { number: 10 }. We then log the multiplied value of that number, which is 20.
+
+    The third time we invoke multiply, we do pass an argument: the object called value. The *= operator is actually shorthand for x.number = x.number * 2: we modify the value of x.number, and log the multiplied value 20.
+
+    The fourth time, we pass the value object again. x.number was previously modified to 20, so x.number *= 2 logs 40.
+  `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What\'s the output?',
+    questionText: `
+    [1, 2, 3, 4].reduce((x, y) => console.log(x, y));
+    `,
+    answer: 'd',
+    a: '1 2 and 3 3 and 6 4',
+    b: '1 2 and 2 3 and 3 4',
+    c: '1 undefined and 2 undefined and 3 undefined and 4 undefined',
+    d: '1 2 and undefined 3 and undefined 4',
+    explanation: `
+    The first argument that the reduce method receives is the accumulator, x in this case. The second argument is the current value, y. With the reduce method, we execute a callback function on every element in the array, which could ultimately result in one single value.
+
+    In this example, we are not returning any values, we are simply logging the values of the accumulator and the current value.
+
+    The value of the accumulator is equal to the previously returned value of the callback function. If you don't pass the optional initialValue argument to the reduce method, the accumulator is equal to the first element on the first call.
+
+    On the first call, the accumulator (x) is 1, and the current value (y) is 2. We don't return from the callback function, we log the accumulator and current value: 1 and 2 get logged.
+
+    If you don't return a value from a function, it returns undefined. On the next call, the accumulator is undefined, and the current value is 3. undefined and 3 get logged.
+
+    On the fourth call, we again don't return from the callback function. The accumulator is again undefined, and the current value is 4. undefined and 4 get logged.
+  `,
+    language: 'JavaScript'
+  },
 ];
 

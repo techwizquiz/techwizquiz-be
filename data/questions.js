@@ -1030,5 +1030,113 @@ export default [
   `,
     language: 'JavaScript'
   },
+  {
+    level: 1,
+    questionTitle: 'What\'s the output?',
+    questionText: `
+    let person = { name: 'Lydia' };
+    const members = [person];
+    person = null;
+
+    console.log(members);
+    `,
+    answer: 'd',
+    a: 'null',
+    b: '[null]',
+    c: '[{}]',
+    d: '[{ name: "Lydia" }]',
+    explanation: `
+    First, we declare a variable person with the value of an object that has a name property.
+
+    Then, we declare a variable called members. We set the first element of that array equal to the value of the person variable. Objects interact by reference when setting them equal to each other. When you assign a reference from one variable to another, you make a copy of that reference. (note that they don't have the same reference!)
+
+    Then, we set the variable person equal to null.
+
+    We are only modifying the value of the person variable, and not the first element in the array, since that element has a different (copied) reference to the object. The first element in members still holds its reference to the original object. When we log the members array, the first element still holds the value of the object, which gets logged.
+  `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What\'s the output?',
+    questionText: `
+    const person = {
+      name: 'Lydia',
+      age: 21,
+    };
+    
+    for (const item in person) {
+      console.log(item);
+    }
+    `,
+    answer: 'b',
+    a: '{ name: "Lydia" }, { age: 21 }',
+    b: '"name", "age"',
+    c: '"Lydia", 21',
+    d: '["name", "Lydia"], ["age", 21]',
+    explanation: `
+    With a for-in loop, we can iterate through object keys, in this case name and age. Under the hood, object keys are strings (if they're not a Symbol). On every loop, we set the value of item equal to the current key it’s iterating over. First, item is equal to name, and gets logged. Then, item is equal to age, which gets logged.
+  `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What\'s the output?',
+    questionText: `
+    console.log(3 + 4 + '5');
+    `,
+    answer: 'b',
+    a: '"345"',
+    b: '"75"',
+    c: '12',
+    d: '"12"',
+    explanation: `
+    Operator associativity is the order in which the compiler evaluates the expressions, either left-to-right or right-to-left. This only happens if all operators have the same precedence. We only have one type of operator: +. For addition, the associativity is left-to-right.
+
+    3 + 4 gets evaluated first. This results in the number 7.
+
+    7 + '5' results in "75" because of coercion. JavaScript converts the number 7 into a string, see question 15. We can concatenate two strings using the +operator. "7" + "5" results in "75".
+  `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What\'s the value of num?',
+    questionText: `
+    const num = parseInt('7*6', 10);
+    `,
+    answer: 'c',
+    a: '42',
+    b: '"42"',
+    c: '7',
+    d: 'NaN',
+    explanation: `
+    Only the first numbers in the string is returned. Based on the radix (the second argument in order to specify what type of number we want to parse it to: base 10, hexadecimal, octal, binary, etc.), the parseInt checks whether the characters in the string are valid. Once it encounters a character that isn't a valid number in the radix, it stops parsing and ignores the following characters.
+
+    * is not a valid number. It only parses "7" into the decimal 7. num now holds the value of 7.
+  `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What\'s the output?',
+    questionText: `
+    [1, 2, 3].map(num => {
+      if (typeof num === 'number') return;
+      return num * 2;
+    });
+    `,
+    answer: 'c',
+    a: '[]',
+    b: '[null, null, null]',
+    c: '[undefined, undefined, undefined]',
+    d: '[ 3 x empty ]',
+    explanation: `
+    When mapping over the array, the value of num is equal to the element it’s currently looping over. In this case, the elements are numbers, so the condition of the if statement typeof num === "number" returns true. The map function creates a new array and inserts the values returned from the function.
+    
+    However, we don’t return a value. When we don’t return a value from the function, the function returns undefined. For every element in the array, the function block gets called, so for each element we return undefined.
+  `,
+    language: 'JavaScript'
+  },
 ];
 

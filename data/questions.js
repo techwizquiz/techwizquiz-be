@@ -924,5 +924,111 @@ export default [
   `,
     language: 'JavaScript'
   },
+  {
+    level: 1,
+    questionTitle: 'What\'s the output?',
+    questionText: `
+    !!null;
+    !!'';
+    !!1;
+    `,
+    answer: 'b',
+    a: 'false true false',
+    b: 'false false true',
+    c: 'false true true',
+    d: 'true true false',
+    explanation: `
+    null is falsy. !null returns true. !true returns false.
+
+    "" is falsy. !"" returns true. !true returns false.
+
+    1 is truthy. !1 returns false. !false returns true.
+  `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What does the setInterval method return in the browser?',
+    questionText: `
+    setInterval(() => console.log('Hi'), 1000);
+    `,
+    answer: 'a',
+    a: 'a unique id',
+    b: 'the amount of milliseconds specified',
+    c: 'the passed function',
+    d: 'undefined',
+    explanation: `
+    It returns a unique id. This id can be used to clear that interval with the clearInterval() function.
+  `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What does this return?',
+    questionText: `
+    [...'Lydia'];
+    `,
+    answer: 'a',
+    a: '["L", "y", "d", "i", "a"]',
+    b: '["Lydia"]',
+    c: '[[], "Lydia"]',
+    d: '[["L", "y", "d", "i", "a"]]',
+    explanation: `
+    A string is an iterable. The spread operator maps every character of an iterable to one element.
+  `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What\'s the output?',
+    questionText: `
+    function* generator(i) {
+      yield i;
+      yield i * 2;
+    }
+    
+    const gen = generator(10);
+    
+    console.log(gen.next().value);
+    console.log(gen.next().value);
+    `,
+    answer: 'c',
+    a: '[0, 10], [10, 20]',
+    b: '20, 20',
+    c: '10, 20',
+    d: '0, 10 and 10, 20',
+    explanation: `
+    Regular functions cannot be stopped mid-way after invocation. However, a generator function can be "stopped" midway, and later continue from where it stopped. Every time a generator function encounters a yield keyword, the function yields the value specified after it. Note that the generator function in that case doesn’t return the value, it yields the value.
+
+    First, we initialize the generator function with i equal to 10. We invoke the generator function using the next() method. The first time we invoke the generator function, i is equal to 10. It encounters the first yield keyword: it yields the value of i. The generator is now "paused", and 10 gets logged.
+
+    Then, we invoke the function again with the next() method. It starts to continue where it stopped previously, still with i equal to 10. Now, it encounters the next yield keyword, and yields i * 2. i is equal to 10, so it returns 10 * 2, which is 20. This results in 10, 20.
+  `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What does this return?',
+    questionText: `
+    const firstPromise = new Promise((res, rej) => {
+      setTimeout(res, 500, 'one');
+    });
+    
+    const secondPromise = new Promise((res, rej) => {
+      setTimeout(res, 100, 'two');
+    });
+    
+    Promise.race([firstPromise, secondPromise]).then(res => console.log(res));
+    `,
+    answer: 'b',
+    a: '"one"',
+    b: '"two"',
+    c: '"two" "one"',
+    d: '"one" "two"',
+    explanation: `
+    When we pass multiple promises to the Promise.race method, it resolves/rejects the first promise that resolves/rejects. To the setTimeout method, we pass a timer: 500ms for the first promise (firstPromise), and 100ms for the second promise (secondPromise). This means that the secondPromise resolves first with the value of 'two'. res now holds the value of 'two', which gets logged.
+  `,
+    language: 'JavaScript'
+  },
 ];
 

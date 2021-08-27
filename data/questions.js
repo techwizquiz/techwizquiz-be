@@ -694,5 +694,126 @@ export default [
   `,
     language: 'JavaScript'
   },
+  {
+    level: 1,
+    questionTitle: 'What is the event.target when clicking the button?',
+    questionText: `
+    <div onclick="console.log('first div')">
+      <div onclick="console.log('second div')">
+        <button onclick="console.log('button')">
+          Click!
+        </button>
+      </div>
+    </div>
+    `,
+    answer: 'c',
+    a: 'Outer div',
+    b: 'Inner div',
+    c: 'button',
+    d: 'An array of all nested elements',
+    explanation: `
+    The deepest nested element that caused the event is the target of the event. You can stop bubbling by event.stopPropagation
+  `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'When you click the paragraph, what\'s the logged output?',
+    questionText: `
+    <div onclick="console.log('div')">
+      <p onclick="console.log('p')">
+        Click here!
+      </p>
+    </div>
+    `,
+    answer: 'a',
+    a: 'p div',
+    b: 'div p',
+    c: 'p',
+    d: 'div',
+    explanation: `
+    If we click p, we see two logs: p and div. During event propagation, there are 3 phases: capturing, target, and bubbling. By default, event handlers are executed in the bubbling phase (unless you set useCapture to true). It goes from the deepest nested element outwards.
+  `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What\'s the output?',
+    questionText: `
+    const person = { name: 'Lydia' };
+
+    function sayHi(age) {
+      return \`\${this.name} is \${age}\`;
+    }
+
+    console.log(sayHi.call(person, 21));
+    console.log(sayHi.bind(person, 21));
+    `,
+    answer: 'd',
+    a: 'undefined is 21 Lydia is 21',
+    b: 'function function',
+    c: 'Lydia is 21 Lydia is 21',
+    d: 'Lydia is 21 function',
+    explanation: `
+    With both, we can pass the object to which we want the this keyword to refer to. However, .call is also executed immediately!
+
+    .bind. returns a copy of the function, but with a bound context! It is not executed immediately.
+  `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What\'s the output?',
+    questionText: `
+    function sayHi() {
+      return (() => 0)();
+    }
+    
+    console.log(typeof sayHi());
+    `,
+    answer: 'b',
+    a: '"object"',
+    b: '"number"',
+    c: '"function"',
+    d: '"undefined"',
+    explanation: `
+    The sayHi function returns the returned value of the immediately invoked function expression (IIFE). This function returned 0, which is type "number".
+
+    FYI: there are only 7 built-in types: null, undefined, boolean, number, string, object, and symbol. "function" is not a type, since functions are objects, it's of type "object".
+  `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'Which of these values are falsy?',
+    questionText: `
+    0;
+    new Number(0);
+    ('');
+    (' ');
+    new Boolean(false);
+    undefined;
+    `,
+    answer: 'a',
+    a: '0, \'\', undefined',
+    b: '0, new Number(0), \'\', new Boolean(false), undefined',
+    c: '0, \'\', new Boolean(false), undefined',
+    d: 'All of them are falsy',
+    explanation: `
+    There are 8 falsy values:
+
+    undefined
+    null
+    NaN
+    false
+    '' (empty string)
+    0
+    -0
+    0n (BigInt(0))
+
+    Function constructors, like new Number and new Boolean, are truthy.
+  `,
+    language: 'JavaScript'
+  },
 ];
 

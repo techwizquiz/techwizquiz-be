@@ -10,11 +10,13 @@ CREATE TABLE users (
 CREATE TABLE questions (
   question_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   level INT NOT NULL,
-  question TEXT NOT NULL,
+  question_title TEXT NOT NULL,
+  question_text TEXT NOT NULL,
   answer TEXT NOT NULL,
   a TEXT NOT NULL,
   b TEXT NOT NULL,
   c TEXT NOT NULL,
   d TEXT NOT NULL,
+  explanation TEXT,
   language TEXT NOT NULL
 );

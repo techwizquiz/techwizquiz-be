@@ -6,23 +6,27 @@ import app from '../lib/app.js';
 
 const peachesQ = {
   level: 2,
-  question: 'Does Peaches have a dog\'s name?',
+  questionTitle: 'Answer',
+  questionText: 'Does Peaches have a dog\'s name?',
   answer: 'a',
   a: 'yes',
   b: 'no',
   c: 'maybe',
   d: 'actually a cat',
+  explanation: 'it is obvious',
   language: 'JavaScript'
 };
 
 const perlQ = {
   level: 1,
-  question: 'Does Perl have a cat\'s name?',
+  questionTitle: 'Answer',
+  questionText: 'Does Perl have a cat\'s name?',
   answer: 'b',
   a: 'no',
   b: 'yes',
   c: 'maybe',
   d: 'actually a dog',
+  explanation: 'it is known',
   language: 'Perl'
 };
 
@@ -35,7 +39,6 @@ describe('questions routes', () => {
     const res = await request(app)
       .post('/api/v1/questions')
       .send(peachesQ);
-    console.log('res.body', res.body);
     expect(res.body).toEqual({
       questionId: '1',
       ...peachesQ

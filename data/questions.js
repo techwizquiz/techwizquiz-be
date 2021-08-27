@@ -1133,8 +1133,155 @@ export default [
     d: '[ 3 x empty ]',
     explanation: `
     When mapping over the array, the value of num is equal to the element it’s currently looping over. In this case, the elements are numbers, so the condition of the if statement typeof num === "number" returns true. The map function creates a new array and inserts the values returned from the function.
-    
+
     However, we don’t return a value. When we don’t return a value from the function, the function returns undefined. For every element in the array, the function block gets called, so for each element we return undefined.
+  `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What\'s the output?',
+    questionText: `
+    function getInfo(member, year) {
+      member.name = 'Lydia';
+      year = '1998';
+    }
+    
+    const person = { name: 'Sarah' };
+    const birthYear = '1997';
+    
+    getInfo(person, birthYear);
+    
+    console.log(person, birthYear);
+    `,
+    answer: 'a',
+    a: '{ name: "Lydia" }, "1997"',
+    b: '{ name: "Sarah" }, "1998"',
+    c: '{ name: "Lydia" }, "1998"',
+    d: '{ name: "Sarah" }, "1997"',
+    explanation: `
+    Arguments are passed by value, unless their value is an object, then they're passed by reference. birthYear is passed by value, since it's a string, not an object. When we pass arguments by value, a copy of that value is created (see question 46).
+
+    The variable birthYear has a reference to the value "1997". The argument year also has a reference to the value "1997", but it's not the same value as birthYear has a reference to. When we update the value of year by setting year equal to "1998", we are only updating the value of year. birthYear is still equal to "1997".
+
+    The value of person is an object. The argument member has a (copied) reference to the same object. When we modify a property of the object member has a reference to, the value of person will also be modified, since they both have a reference to the same object. person's name property is now equal to the value "Lydia"
+  `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What\'s the output?',
+    questionText: `
+    function greeting() {
+      throw 'Hello world!';
+    }
+    
+    function sayHi() {
+      try {
+        const data = greeting();
+        console.log('It worked!', data);
+      } catch (e) {
+        console.log('Oh no an error:', e);
+      }
+    }
+    
+    sayHi();
+    `,
+    answer: 'd',
+    a: 'It worked! Hello world!',
+    b: 'Oh no an error: undefined',
+    c: 'SyntaxError: can only throw Error objects',
+    d: 'Oh no an error: Hello world!',
+    explanation: `
+    With the throw statement, we can create custom errors. With this statement, you can throw exceptions. An exception can be a string, a number, a boolean or an object. In this case, our exception is the string 'Hello world!'.
+
+    With the catch statement, we can specify what to do if an exception is thrown in the try block. An exception is thrown: the string 'Hello world!'. e is now equal to that string, which we log. This results in 'Oh an error: Hello world!'.
+  `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What\'s the output?',
+    questionText: `
+    function Car() {
+      this.make = 'Lamborghini';
+      return { make: 'Maserati' };
+    }
+    
+    const myCar = new Car();
+    console.log(myCar.make);
+    `,
+    answer: 'b',
+    a: '"Lamborghini"',
+    b: '"Maserati"',
+    c: 'ReferenceError',
+    d: 'TypeError',
+    explanation: `
+    When you return a property, the value of the property is equal to the returned value, not the value set in the constructor function. We return the string "Maserati", so myCar.make is equal to "Maserati".
+  `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What\'s the output?',
+    questionText: `
+    (() => {
+      let x = (y = 10);
+    })();
+    
+    console.log(typeof x);
+    console.log(typeof y);
+    `,
+    answer: 'a',
+    a: '"undefined", "number"',
+    b: '"number", "number"',
+    c: '"object", "number"',
+    d: '"number", "undefined"',
+    explanation: `
+    let x = (y = 10); is actually shorthand for:
+
+    y = 10;
+    let x = y;
+
+    When we set y equal to 10, we actually add a property y to the global object (window in browser, global in Node). In a browser, window.y is now equal to 10.
+
+    Then, we declare a variable x with the value of y, which is 10. Variables declared with the let keyword are block scoped, they are only defined within the block they're declared in; the immediately invoked function expression (IIFE) in this case. When we use the typeof operator, the operand x is not defined: we are trying to access x outside of the block it's declared in. This means that x is not defined. Values who haven't been assigned a value or declared are of type "undefined". console.log(typeof x) returns "undefined".
+
+    However, we created a global variable y when setting y equal to 10. This value is accessible anywhere in our code. y is defined, and holds a value of type "number". console.log(typeof y) returns "number".
+  `,
+    language: 'JavaScript'
+  },
+  {
+    level: 1,
+    questionTitle: 'What\'s the output?',
+    questionText: `
+    class Dog {
+      constructor(name) {
+        this.name = name;
+      }
+    }
+    
+    Dog.prototype.bark = function() {
+      console.log(\`Woof I am \${this.name}\`);
+    };
+    
+    const pet = new Dog('Mara');
+    
+    pet.bark();
+    
+    delete Dog.prototype.bark;
+    
+    pet.bark();
+    `,
+    answer: 'a',
+    a: '"Woof I am Mara", TypeError',
+    b: '"Woof I am Mara", "Woof I am Mara"',
+    c: '"Woof I am Mara", undefined',
+    d: 'TypeError, TypeError',
+    explanation: `
+    We can delete properties from objects using the delete keyword, also on the prototype. By deleting a property on the prototype, it is not available anymore in the prototype chain. In this case, the bark function is not available anymore on the prototype after delete Dog.prototype.bark, yet we still try to access it.
+
+    When we try to invoke something that is not a function, a TypeError is thrown. In this case TypeError: pet.bark is not a function, since pet.bark is undefined.
   `,
     language: 'JavaScript'
   },

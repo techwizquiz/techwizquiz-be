@@ -2,7 +2,7 @@ import pool from '../lib/utils/pool.js';
 import setup from '../data/setup.js';
 import request from 'supertest';
 import app from '../lib/app.js';
-// import Question from '../lib/models/Question.js';
+import Question from '../lib/models/Question.js';
 
 const peachesQ = {
   level: 2,
@@ -43,6 +43,22 @@ describe('questions routes', () => {
       questionId: '1',
       ...peachesQ
     });
+  });
+
+  it('finds all questions', async () => {
+    await Question.insert(peachesQ);
+    await Question.insert(perlQ);
+
+    const res = await request(app)
+      .get('/api/v1/questions');
+    expect(res.body).toEqual([{
+      questionId: '1',
+      ...peachesQ
+    },
+    {
+      questionId: '2',
+      ...perlQ
+    }]);
   });
 });
 

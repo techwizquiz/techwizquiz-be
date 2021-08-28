@@ -26,5 +26,5 @@ CREATE TABLE responses (
   response_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   user_id BIGINT NOT NULL REFERENCES users(id),
   question_id BIGINT NOT NULL REFERENCES questions(question_id),
-  correct BOOLEAN NOT NULL
+  is_correct BOOLEAN NOT NULL
 );

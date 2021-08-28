@@ -46,5 +46,10 @@ describe('responses routes', () => {
       ...response1
     });
   });
+
+  it('filters responses by user id', async () => {
+    
+  });
+
 });
 

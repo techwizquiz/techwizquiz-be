@@ -91,10 +91,12 @@ describe('responses routes', () => {
 
     const res = await agent
       .get(`/api/v1/responses/${user.id}/correct`);
-    expect(res.body).toEqual({
-      responseId: '1',
-      ...response1
-    });
+    expect(res.body).toEqual([
+      {
+        responseId: '1',
+        ...response1
+      }
+    ]);
   });
 
   // for scoring purposes: find all incorrect responses by user id
@@ -119,10 +121,12 @@ describe('responses routes', () => {
 
     const res = await agent
       .get(`/api/v1/responses/${user.id}/incorrect`);
-    expect(res.body).toEqual({
-      responseId: '2',
-      ...response2
-    });
+    expect(res.body).toEqual([
+      {
+        responseId: '2',
+        ...response2
+      }
+    ]);
   });
   // for display purposes: find whether user answered question correctly or incorrectly 
 

@@ -4,7 +4,7 @@ import request from 'supertest';
 import app from '../lib/app.js';
 import UserService from '../lib/services/UserService.js';
 import Question from '../lib/models/Question.js';
-import User from '../lib/models/User.js';
+import Response from '../lib/models/Response.js';
 
 const agent = request.agent(app);
 
@@ -12,6 +12,12 @@ const response1 = {
   userId: '1',
   questionId: '1',
   isCorrect: true
+};
+
+const response2 = {
+  userId: '1',
+  questionId: '2',
+  isCorrect: false
 };
 
 const peachesQ = {
@@ -27,6 +33,19 @@ const peachesQ = {
   language: 'JavaScript'
 };
 
+const perlQ = {
+  level: 1,
+  questionTitle: 'Answer',
+  questionText: 'Does Perl have a cat\'s name?',
+  answer: 'b',
+  a: 'no',
+  b: 'yes',
+  c: 'maybe',
+  d: 'actually a dog',
+  explanation: 'it is known',
+  language: 'Perl'
+};
+
 describe('responses routes', () => {
 
   beforeEach(async() => {
@@ -34,20 +53,12 @@ describe('responses routes', () => {
   });
 
   it('creates a response via POST', async () => {
-
     await UserService.create({
       email: 'peaches@peaches.com',
       password: 'peaches'
     });
 
-    const authorized = await UserService.authorize({
-      email: 'peaches@peaches.com',
-      password: 'peaches'
-    });
-
     await Question.insert(peachesQ);
-
-    console.log(authorized);
 
     const res = await agent
       .post('/api/v1/responses')
@@ -59,12 +70,37 @@ describe('responses routes', () => {
     });
   });
 
-  // for scoring purposes: find correct responses by user id
-  // it('finds correct responses by user id', async () => {
-    
-  // });
+  // for scoring purposes: find all correct responses by user id
+  it('finds correct responses by user id', async () => {
+    const user = await UserService.create({
+      email: 'peaches@peaches.com',
+      password: 'peaches'
+    });
 
-  // for scoring purposes: find incorrect responses by user id
+    await Question.insert(peachesQ);
+    await Question.insert(perlQ);
+
+    await agent
+      .post('/api/v1/responses')
+      .send(response1)
+      .set('Cookie', process.env.TEST_JWT);
+
+    await agent
+      .post('/api/v1/responses')
+      .send(response2)
+      .set('Cookie', process.env.TEST_JWT);
+
+    const res = await agent
+      .get(`/api/v1/responses/${user.id}/correct`);
+    expect(res.body).toEqual({
+      responseId: '1',
+      ...response1
+    });
+  });
+
+  // for scoring purposes: find all incorrect responses by user id
+
+  // for display purposes: find whether user answered question correctly or incorrectly 
 
   // patch isCorrect column to update question from incorrect to correct 
 

@@ -172,7 +172,7 @@ describe('responses routes', () => {
       password: 'peaches'
     });
 
-    await Question.insert(peachesQ);
+    const peachesQuestion = await Question.insert(peachesQ);
 
     await agent
       .post('/api/v1/responses')
@@ -180,12 +180,39 @@ describe('responses routes', () => {
       .set('Cookie', process.env.TEST_JWT);
 
     const res = await agent
-      .get(`/api/v1/responses/${user.id}/${peachesQ.id}/status`);
+      .get(`/api/v1/responses/${user.id}/${peachesQuestion.questionId}/status`);
     expect(res.body).toEqual(true);
     console.log(res.body);
   });
 
   // patch isCorrect column to update question from incorrect to correct 
 
+  it('patches is_correct from false to true', async () => {
+    const user = await UserService.create({
+      email: 'peaches@peaches.com',
+      password: 'peaches'
+    });
+
+    const perlQuestion = await Question.insert(perlQ);
+
+    await agent
+      .post('/api/v1/responses')
+      .send({
+        userId: '1',
+        questionId: '1',
+        isCorrect: false
+      })
+      .set('Cookie', process.env.TEST_JWT);
+
+    const res = await agent
+      .patch(`/api/v1/responses/${user.id}/${perlQuestion.questionId}`);
+
+    expect(res.body).toEqual({
+      responseId: '1',
+      userId: '1',
+      questionId: '1',
+      isCorrect: true
+    });
+  });
 });
 

@@ -99,7 +99,32 @@ describe('responses routes', () => {
   });
 
   // for scoring purposes: find all incorrect responses by user id
+  it('finds incorrect responses by user id', async () => {
+    const user = await UserService.create({
+      email: 'peaches@peaches.com',
+      password: 'peaches'
+    });
 
+    await Question.insert(peachesQ);
+    await Question.insert(perlQ);
+
+    await agent
+      .post('/api/v1/responses')
+      .send(response1)
+      .set('Cookie', process.env.TEST_JWT);
+
+    await agent
+      .post('/api/v1/responses')
+      .send(response2)
+      .set('Cookie', process.env.TEST_JWT);
+
+    const res = await agent
+      .get(`/api/v1/responses/${user.id}/incorrect`);
+    expect(res.body).toEqual({
+      responseId: '2',
+      ...response2
+    });
+  });
   // for display purposes: find whether user answered question correctly or incorrectly 
 
   // patch isCorrect column to update question from incorrect to correct 

@@ -19,6 +19,12 @@ const response2 = {
   isCorrect: false
 };
 
+const response3 = {
+  userId: '1',
+  questionId: '3',
+  isCorrect: false
+};
+
 const peachesQ = {
   level: 2,
   questionTitle: 'Answer',
@@ -43,6 +49,19 @@ const perlQ = {
   d: 'actually a dog',
   explanation: 'it is known',
   language: 'Perl'
+};
+
+const mamaQ = {
+  level: 1,
+  questionTitle: 'Answer',
+  questionText: 'Does Mama have a dog\'s name?',
+  answer: 'b',
+  a: 'no',
+  b: 'yes',
+  c: 'maybe',
+  d: 'actually a cat',
+  explanation: 'it is known',
+  language: 'JavaScript'
 };
 
 describe('responses routes', () => {
@@ -78,6 +97,7 @@ describe('responses routes', () => {
 
     await Question.insert(peachesQ);
     await Question.insert(perlQ);
+    await Question.insert(mamaQ);
 
     await agent
       .post('/api/v1/responses')
@@ -87,6 +107,11 @@ describe('responses routes', () => {
     await agent
       .post('/api/v1/responses')
       .send(response2)
+      .set('Cookie', process.env.TEST_JWT);
+
+    await agent
+      .post('/api/v1/responses')
+      .send(response3)
       .set('Cookie', process.env.TEST_JWT);
 
     const res = await agent
@@ -108,6 +133,7 @@ describe('responses routes', () => {
 
     await Question.insert(peachesQ);
     await Question.insert(perlQ);
+    await Question.insert(mamaQ);
 
     await agent
       .post('/api/v1/responses')
@@ -119,15 +145,25 @@ describe('responses routes', () => {
       .send(response2)
       .set('Cookie', process.env.TEST_JWT);
 
+    await agent
+      .post('/api/v1/responses')
+      .send(response3)
+      .set('Cookie', process.env.TEST_JWT);
+
     const res = await agent
       .get(`/api/v1/responses/${user.id}/incorrect`);
     expect(res.body).toEqual([
       {
         responseId: '2',
         ...response2
+      },
+      {
+        responseId: '3',
+        ...response3
       }
     ]);
   });
+  
   // for display purposes: find whether user answered question correctly or incorrectly 
 
   // patch isCorrect column to update question from incorrect to correct 

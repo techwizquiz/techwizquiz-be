@@ -4,7 +4,6 @@ import request from 'supertest';
 import app from '../lib/app.js';
 import UserService from '../lib/services/UserService.js';
 import Question from '../lib/models/Question.js';
-import Response from '../lib/models/Response.js';
 
 const agent = request.agent(app);
 

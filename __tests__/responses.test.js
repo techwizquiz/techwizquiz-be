@@ -163,8 +163,27 @@ describe('responses routes', () => {
       }
     ]);
   });
-  
+
   // for display purposes: find whether user answered question correctly or incorrectly 
+
+  it('for given question, finds whether user answered it correctly or incorrectly', async () => {
+    const user = await UserService.create({
+      email: 'peaches@peaches.com',
+      password: 'peaches'
+    });
+
+    await Question.insert(peachesQ);
+
+    await agent
+      .post('/api/v1/responses')
+      .send(response1)
+      .set('Cookie', process.env.TEST_JWT);
+
+    const res = await agent
+      .get(`/api/v1/responses/${user.id}/${peachesQ.id}/status`);
+    expect(res.body).toEqual(true);
+    console.log(res.body);
+  });
 
   // patch isCorrect column to update question from incorrect to correct 
 

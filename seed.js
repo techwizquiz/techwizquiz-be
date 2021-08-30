@@ -1,6 +1,5 @@
 import Question from './lib/models/Question.js';
 import { questions } from './data/questions.js';
-// import pool from './lib/utils/pool.js';
 
 run();
 

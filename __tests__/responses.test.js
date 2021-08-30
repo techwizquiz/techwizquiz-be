@@ -165,7 +165,6 @@ describe('responses routes', () => {
   });
 
   // for display purposes: find whether user answered question correctly or incorrectly 
-
   it('for given question, finds whether user answered it correctly or incorrectly', async () => {
     const user = await UserService.create({
       email: 'peaches@peaches.com',
@@ -186,7 +185,6 @@ describe('responses routes', () => {
   });
 
   // patch isCorrect column to update question from incorrect to correct 
-
   it('patches is_correct from false to true', async () => {
     const user = await UserService.create({
       email: 'peaches@peaches.com',

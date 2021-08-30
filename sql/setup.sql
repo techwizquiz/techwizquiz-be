@@ -1,6 +1,8 @@
 DROP TABLE IF EXISTS users,
 questions,
-responses CASCADE;
+responses,
+stats 
+CASCADE;
 
 CREATE TABLE users (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -27,4 +29,10 @@ CREATE TABLE responses (
   user_id BIGINT NOT NULL REFERENCES users(id),
   question_id BIGINT NOT NULL REFERENCES questions(question_id),
   is_correct BOOLEAN NOT NULL
+);
+
+CREATE TABLE stats (
+  stats_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  user_id BIGINT NOT NULL REFERENCES users(id),
+  score INT NOT NULL
 );

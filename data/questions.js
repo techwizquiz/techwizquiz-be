@@ -256,7 +256,7 @@ export const questions = [
     
     const member = new Person('Lydia', 'Hallie');
     Person.getFullName = function() {
-      return \`${this.firstName} ${this.lastName}\`;
+      return \`\${this.firstName} \${this.lastName}\`;
     };
     
     console.log(member.getFullName());
@@ -272,7 +272,7 @@ export const questions = [
     If you want a method to be available to all object instances, you have to add it to the prototype property:
 
     Person.prototype.getFullName = function() {
-      return \`${this.firstName} ${this.lastName}\`;
+      return \`$\{this.firstName} $\{this.lastName}\`;
     };
   `,
     language: 'JavaScript'
@@ -3779,7 +3779,7 @@ This would've logged "I made it!"
 
     Since the value of dog is an object, animals[dog] actually means that we’re creating a new property called "object Object" equal to the new object. animals["object Object"] is now equal to { emoji: "🐶", name: "Mara"}.
 
-    cat is also an object, which means that animals[cat] actually means that we’re overwriting the value of animals[``"``object Object``"``] with the new cat properties.
+    cat is also an object, which means that animals[cat] actually means that we’re overwriting the value of animals with the new cat properties.
 
     Logging animals[dog], or actually animals["object Object"] since converting the dog object to a string results "object Object", returns the { emoji: "🐈", name: "Sara" }.
     `,

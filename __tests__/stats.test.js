@@ -17,7 +17,6 @@ describe('stats routes', () => {
   });
 
   it('POST score to stats table', async () => {
-
     await UserService.create({
       email: 'peaches@peaches.com',
       password: 'peaches'
@@ -27,6 +26,7 @@ describe('stats routes', () => {
       .post('/api/v1/stats')
       .send(score1)
       .set('Cookie', process.env.TEST_JWT);
+    console.log('HELLO', res.body);
     expect(res.body).toEqual({
       statsId: '1',
       ...score1

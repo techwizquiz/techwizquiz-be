@@ -48,13 +48,13 @@ describe('stats routes', () => {
 
     const res = await agent
       .patch(`/api/v1/stats/${user.id}`)
-      .send({ score: '2' })
+      .send({ score: 8 })
       .set('Cookie', process.env.TEST_JWT);
 
     expect(res.body).toEqual({
       statId: '1',
       userId: '1',
-      score: 5
+      score: 8
     });
   });
 });

@@ -28,7 +28,7 @@ describe('stats routes', () => {
       .set('Cookie', process.env.TEST_JWT);
     console.log('HELLO', res.body);
     expect(res.body).toEqual({
-      statsId: '1',
+      statId: '1',
       ...score1
     });
   });

@@ -11,8 +11,6 @@ const score1 = {
   score: 3
 };
 
-const updatedScore = 
-
 describe('stats routes', () => {
   beforeEach(() => {
     return setup(pool);

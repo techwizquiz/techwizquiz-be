@@ -11,6 +11,8 @@ const score1 = {
   score: 3
 };
 
+const updatedScore = 
+
 describe('stats routes', () => {
   beforeEach(() => {
     return setup(pool);
@@ -26,10 +28,33 @@ describe('stats routes', () => {
       .post('/api/v1/stats')
       .send(score1)
       .set('Cookie', process.env.TEST_JWT);
-    console.log('HELLO', res.body);
+
     expect(res.body).toEqual({
       statId: '1',
       ...score1
+    });
+  });
+
+  it('updates score via PATCH', async () => {
+    const user = await UserService.create({
+      email: 'peaches@peaches.com',
+      password: 'peaches'
+    });
+
+    await agent 
+      .post('/api/v1/stats')
+      .send(score1)
+      .set('Cookie', process.env.TEST_JWT);
+
+    const res = await agent
+      .patch(`/api/v1/stats/${user.id}`)
+      .send({ score: '2' })
+      .set('Cookie', process.env.TEST_JWT);
+
+    expect(res.body).toEqual({
+      statId: '1',
+      userId: '1',
+      score: 5
     });
   });
 });

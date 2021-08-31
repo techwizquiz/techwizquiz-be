@@ -55,4 +55,25 @@ describe('stats routes', () => {
       score: 8
     });
   });
+
+  it('gets score by user id', async () => {
+    const user = await UserService.create({
+      email: 'peaches@peaches.com',
+      password: 'peaches'
+    });
+
+    await agent 
+      .post('/api/v1/stats')
+      .send(score1)
+      .set('Cookie', process.env.TEST_JWT);
+
+    const res = await agent
+      .get(`/api/v1/stats/${user.id}`);
+    
+    expect(res.body).toEqual({
+      statId: '1',
+      userId: '1',
+      score: 3
+    });
+  });
 });

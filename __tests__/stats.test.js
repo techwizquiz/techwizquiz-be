@@ -73,7 +73,7 @@ describe('stats routes', () => {
     expect(res.body).toEqual({
       statId: '1',
       userId: '1',
-      score: 8
+      score: 3
     });
   });
 });

@@ -181,7 +181,6 @@ describe('responses routes', () => {
     const res = await agent
       .get(`/api/v1/responses/${user.id}/${peachesQuestion.questionId}/status`);
     expect(res.body).toEqual(true);
-    console.log(res.body);
   });
 
   // patch isCorrect column to update question from incorrect to correct 

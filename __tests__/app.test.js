@@ -7,6 +7,7 @@ import UserService from '../lib/services/UserService';
 describe('auth routes', () => {
   const user = {
     email: 'peachy@peachy.com',
+    avatar: 'octopus',
     password: 'peachesthedog'
   };
 
@@ -21,7 +22,8 @@ describe('auth routes', () => {
 
     expect(res.body).toEqual({
       id: '1',
-      email: user.email
+      email: user.email,
+      avatar: 'octopus'
     });
   });
 
@@ -33,7 +35,8 @@ describe('auth routes', () => {
       .send(user);
     expect(res.body).toEqual({
       id: '1',
-      email: 'peachy@peachy.com'
+      email: 'peachy@peachy.com',
+      avatar: 'octopus'
     });
   });
 

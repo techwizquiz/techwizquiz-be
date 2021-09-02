@@ -40,4 +40,23 @@ describe('auth routes', () => {
     });
   });
 
+  // test.only('GET user to auth/verify', async () => {
+  //   await UserService.create(user);
+
+  //   await request.agent(app)
+  //     .post('/api/v1/auth/login')
+  //     .send(user);
+
+  //   // console.log('user response', userRes.body);
+
+  //   const res = await request.agent(app)
+  //     .get('/api/v1/auth/verify');
+  //   // console.log('res.body', res.body);
+  //   expect(res.body).toEqual({
+  //     id: '1',
+  //     email: 'peachy@peachy.com',
+  //     avatar: 'octopus'
+  //   });
+  // });
+
 });

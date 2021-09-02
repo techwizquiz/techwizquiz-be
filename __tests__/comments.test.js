@@ -55,7 +55,7 @@ const comment3 = {
   comment: 'Who is Peaches??'
 };
 
-describe('comments routes', () => {
+describe.skip('comments routes', () => {
   beforeEach(async() => {
     await setup(pool);
   });

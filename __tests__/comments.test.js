@@ -51,4 +51,8 @@ describe('comments routes', () => {
     });
   });
 
+  // find all comments by question id
+
+  // find all comments by user id
+
 });

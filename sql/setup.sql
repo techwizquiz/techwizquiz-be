@@ -1,7 +1,8 @@
 DROP TABLE IF EXISTS users,
 questions,
 responses,
-stats 
+stats,
+comments 
 CASCADE;
 
 CREATE TABLE users (
@@ -37,3 +38,11 @@ CREATE TABLE stats (
   user_id BIGINT NOT NULL REFERENCES users(id),
   score INT NOT NULL
 );
+
+CREATE TABLE comments (
+  comment_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  question_id BIGINT NOT NULL REFERENCES questions(question_id),
+  user_id BIGINT NOT NULL REFERENCES users(id),
+  name TEXT,
+  comment TEXT NOT NULL
+)

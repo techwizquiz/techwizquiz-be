@@ -43,7 +43,7 @@ const mamaQ = {
   language: 'JavaScript'
 };
 
-describe('questions routes', () => {
+describe.skip('questions routes', () => {
   beforeEach(() => {
     return setup(pool);
   });

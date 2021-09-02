@@ -64,7 +64,7 @@ const mamaQ = {
   language: 'JavaScript'
 };
 
-describe('responses routes', () => {
+describe.skip('responses routes', () => {
 
   beforeEach(async() => {
     await setup(pool);

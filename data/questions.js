@@ -1693,7 +1693,7 @@ export const questions = [
   },
   {
     level: 1,
-    questionTitle: 'What\'s the output',
+    questionTitle: 'What\'s the output?',
     questionText: `
     console.log(String.raw\`Hello\nworld\`);
     `,
@@ -1798,7 +1798,7 @@ This would've logged "I made it!"
   },
   {
     level: 1,
-    questionTitle: 'What\'s the output',
+    questionTitle: 'What\'s the output?',
     questionText: `
     const { name: myName } = { name: 'Lydia' };
 
@@ -1840,7 +1840,7 @@ This would've logged "I made it!"
   },
   {
     level: 1,
-    questionTitle: 'What is the output',
+    questionTitle: 'What is the output?',
     questionText: `
     const add = () => {
       const cache = {};
@@ -1880,7 +1880,7 @@ This would've logged "I made it!"
   },
   {
     level: 1,
-    questionTitle: 'What is the output',
+    questionTitle: 'What is the output?',
     questionText: `
     const myLifeSummedUp = ['☕', '💻', '🍷', '🍫'];
 
@@ -1910,7 +1910,7 @@ This would've logged "I made it!"
   },
   {
     level: 1,
-    questionTitle: 'What is the output',
+    questionTitle: 'What is the output?',
     questionText: `
     const list = [1 + 2, 1 * 2, 1 / 2];
     console.log(list);
@@ -1929,7 +1929,7 @@ This would've logged "I made it!"
   },
   {
     level: 1,
-    questionTitle: 'What is the output',
+    questionTitle: 'What is the output?',
     questionText: `
     function sayHi(name) {
       return \`Hi there, \${name}\`;
@@ -1955,7 +1955,7 @@ This would've logged "I made it!"
   },
   {
     level: 1,
-    questionTitle: 'What is the output',
+    questionTitle: 'What is the output?',
     questionText: `
     var status = '😎';
 
@@ -1987,7 +1987,7 @@ This would've logged "I made it!"
   },
   {
     level: 1,
-    questionTitle: 'What is the output',
+    questionTitle: 'What is the output?',
     questionText: `
     const person = {
       name: 'Lydia',
@@ -2017,7 +2017,7 @@ This would've logged "I made it!"
   },
   {
     level: 1,
-    questionTitle: 'What is the output',
+    questionTitle: 'What is the output?',
     questionText: `
     function checkAge(age) {
       if (age < 18) {
@@ -2103,7 +2103,7 @@ This would've logged "I made it!"
   },
   {
     level: 1,
-    questionTitle: 'What is the output',
+    questionTitle: 'What is the output?',
     questionText: `
     function sum(num1, num2 = num1) {
       console.log(num1 + num2);
@@ -2125,7 +2125,7 @@ This would've logged "I made it!"
   },
   {
     level: 1,
-    questionTitle: 'What is the output',
+    questionTitle: 'What is the output?',
     questionText: `
     // module.js
     export default () => 'Hello world';
@@ -3155,7 +3155,7 @@ This would've logged "I made it!"
   },
   {
     level: 1,
-    questionTitle: 'What is the output',
+    questionTitle: 'What is the output?',
     questionText: `
     const randomValue = 21;
 
